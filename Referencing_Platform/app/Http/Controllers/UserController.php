@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use View;
+use Session;
+use Redirect;
+use Illuminate\Support\Facades\DB;
+
+//use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -27,14 +33,14 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user = new User();
+       /* $user = new User();
         $companys = DB::table('owners')->pluck('company');
         $companys_users = DB::table('owner_users')->pluck('name');
         $packages = DB::table('packages')->pluck('name');
         $users_types = DB::table('user_types')->pluck('value');
         $locations = DB::table('locations')->pluck('name');
 
-        return View::make('user.save',compact('user','companys','companys_users','packages','users_types','locations'));
+        return View::make('user.save',compact('user','companys','companys_users','packages','users_types','locations'));*/
     }
 
     /**
@@ -45,7 +51,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $owner_id = DB::table('owners')->whereCompany($request['owner_id'])->value('id');
+        /*$owner_id = DB::table('owners')->whereCompany($request['owner_id'])->value('id');
         $owner_user_id = DB::table('owner_users')->whereName($request['owner_user_id'])->value('id');
         $package_id = DB::table('packages')->whereName($request['package_id']) ->value('id');
         $user_type_id = DB::table('user_types')->whereValue($request['user_type_id']) ->value('id');
@@ -65,8 +71,8 @@ class UserController extends Controller
             'status'=>$request['status'], 
         ]);
 
-        Alert::success('Success', 'User created correctly');
-        return redirect::to('user/index');
+       // Alert::success('Success', 'User created correctly');
+        return redirect::to('user/index');*/
     }
 
     /**
@@ -95,7 +101,7 @@ class UserController extends Controller
         $phone_number = DB::table('users')->pluck('phone_number');
         $country_code = DB::table('users')->pluck('country_code');
 
-        return View::make('user.edit', compact('name','email','phone_number','country_code'));
+        return View::make('User/edit', compact('name','email','phone_number','country_code','user'));
     }
 
     /**
@@ -107,31 +113,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $owner_id = DB::table('owners')->whereCompany($request['owner_id'])->value('id');
-        $owner_user_id = DB::table('owner_users')->whereName($request['owner_user_id'])->value('id');
-        $package_id = DB::table('packages')->whereName($request['package_id'])->value('id');
-        $user_type_id = DB::table('user_types')->whereValue($request['user_type_id'])->value('id');
-        $location_id = DB::table('locations')->whereName($request['location_id'])->value('id');
-
-
+    	
         $user = User::find($id);
-        $user->fill([
-            'owner_id'=>$owner_id, 
-            'owner_user_id'=>$owner_user_id,  
-            'package_id'=>$package_id,  
-            'user_type_id'=>$user_type_id, 
+        $user->fill([            
             'name'=>$request['name'], 
             'email'=>$request['email'], 
-            'password'=>$request['password'], 
-            'location_id'=>$location_id, 
-            'map'=>$request['map'], 
-            'activation_date'=>$request['activation_date'], 
-            'status'=>$request['status'], 
+            'country_code'=>$request['country_code'], 
+            'phone_number'=>$request['phone_number'],            
         ]); 
         $user->save();
 
-        Alert::success('Success', 'User updated correctly');
-        return redirect::to('user/index');
+        //Alert::success('Success', 'User updated correctly');
+        return View::make('User/edit', compact('user'));
     }
 
     /**
@@ -147,7 +140,7 @@ class UserController extends Controller
               // $id=$request->get('id');
 
                  if($id=='null'){
-                    Alert::warning('Warning', 'Error User Data');
+                    //Alert::warning('Warning', 'Error User Data');
                     return redirect::to('user/index');
                  }else{
 
@@ -161,7 +154,7 @@ class UserController extends Controller
                         //=$package->delete();
                         //dd($valor);
                         
-                        Alert::success('Success', 'User Delete correctly')->autoClose(1800);
+                      //  Alert::success('Success', 'User Delete correctly')->autoClose(1800);
                         return redirect()->route('user.index');
                         }
 

@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/edit/{id}/edit','UserController@edit')->name('edit');
+Route::post('user/{id}','UserController@update')->name('user.update');
 Route::post('/profile/edit');////terminar
 /////////////////////////Twilio
 
