@@ -8,6 +8,7 @@ use View;
 use Session;
 use Redirect;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 //use RealRashid\SweetAlert\Facades\Alert;
 
@@ -22,8 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return View::make('user.index', compact('users'));
+        $user = User::all();
+        return View::make('User.indexA',compact('user'));
     }
 
     /**
@@ -123,8 +124,8 @@ class UserController extends Controller
         ]); 
         $user->save();
 
-        //Alert::success('Success', 'User updated correctly');
-        return View::make('User/edit', compact('user'));
+        Alert::success('Success', 'User updated correctly')->autoClose(5000);
+        return View::make('home');
     }
 
     /**
@@ -159,20 +160,7 @@ class UserController extends Controller
                         }
 
                  }
-
-         /*$Select = $request->get('id');
-            dd($Select);
-        Alert::warning('Are you sure?', 'User Successfully Removed')
-        ->footer('<a href> is sure to delete ? </a>')
-        ->showConfirmButton('Yes, Delete it!','#3085d6')
-        ->showCancelButton('No, Keep it !','#aaa')
-        ->showCloseButton(); 
-
-        //$user = User::find($id);
-        //$user->delete();
-
-        //Alert::success('Success', ' successfully removed');
-        return redirect::to('user/index');*/
+         
     }
 
 }

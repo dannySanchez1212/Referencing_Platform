@@ -61,6 +61,40 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="Telefono" class="col-md-4 col-form-label text-md-right">{{ __('Numero de Telefono') }}</label>
+
+                            <div class="col-md-2">
+                                <input id="country_code" type="text" placeholder="Codigo de Pais" class="form-control{{ $errors->has('country_code') ? ' is-invalid' : '' }}" name="country_code"  required>
+
+                                @if ($errors->has('country_code'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('country_code') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-4">
+                                <input id="phone_number" type="text" placeholder="Numero de Telefono Movil" class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" name="phone_number"  required>
+
+                                @if ($errors->has('phone_number'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('phone_number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+
+
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

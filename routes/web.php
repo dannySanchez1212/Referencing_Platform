@@ -18,14 +18,29 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user/indexA/','UserController@index')->name('user.indexA');
 Route::get('/edit/{id}/edit','UserController@edit')->name('edit');
 Route::post('user/{id}','UserController@update')->name('user.update');
-Route::post('/profile/edit');////terminar
+Route::get('user/{id}/destroy',[
+	'uses'=>'UserController@destroy',
+	'as'  =>'user.destroy'
+]);
+Route::post('/destroyU','OwnerController@destroy');
+////Route::post('/profile/edit');////terminar
 /////////////////////////Twilio
+Route::get('/Twilio/Sms','TwilioController@index')->name('Twilio.Sms');
+Route::post('/Twilio/Send','TwilioController@send')->name('Twilio.send');
+
 
 Route::get('/profile/phone/send','TwilioController@requestSms');
 Route::get('/profile/phone','TwilioController@getConfirmPhone');
 Route::post('/profile/phone','TwilioController@postConfirmPhone');
 Route::get('/SendSms','TwilioController@sendSms')->name('user.SendSms');
+
+
+
+///////////docmail
+
+Route::get('/docmail','DocmailController@Docmail')->name('user.docmail');
 
 

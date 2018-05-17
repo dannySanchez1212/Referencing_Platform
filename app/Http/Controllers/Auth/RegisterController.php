@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use View;
+use Session;
+use Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +68,8 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    {   
+        //dd($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -72,5 +77,6 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'country_code' => $data['country_code'],
         ]);
+        Alert::success('Success', 'User created correctly');
     }
 }

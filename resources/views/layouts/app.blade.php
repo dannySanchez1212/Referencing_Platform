@@ -8,24 +8,37 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Referencing Platform') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+   
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <style>
+        div.dataTables_wrapper 
+            {
+            width: 100%;
+            }
+    </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Styles 
+    
+<script src="{{ asset('js/app.js') }}"></script> -->
+ <!-- Scripts -->
+   
+   <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Referencing Platform') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -57,15 +70,18 @@
                                      href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('Twilio')<span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <a href="{{ route('user.SendSms') }}">Send Sms</a>
+                                        <a href="{{ route('Twilio.Sms') }}">Send Sms</a>
 
                                     </ul>                                   
                                     
                             </li>
                             <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        Documail <span class="caret"></span>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        @lang('Docmail')<span class="caret"></span>
                                     </a>
+                                    <ul class="dropdown-menu">
+                                        <a href="{{ route('user.docmail') }}">Send Docmail</a>
+                                    </ul>
                                     
                             </li>
                             <li class="nav-item dropdown">
@@ -74,6 +90,15 @@
                                     </a>
                                     
                             </li>
+                                   @if(Auth::user()->name=='Admin')
+
+                                    <li class="nav-item dropdown">
+                                    <a  class="nav-link dropdown-toggle" href=" {{ route('user.indexA') }} " role="button" aria-expanded="false" v-pre>
+                                        User <span class="caret"></span>
+                                    </a>
+                                    
+                            `       </li>
+                                   @endif
 
                             @endif
 
@@ -112,5 +137,9 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script> 
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+         @yield('scripts')
 </body>
 </html>
