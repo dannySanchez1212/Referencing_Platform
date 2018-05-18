@@ -8,6 +8,7 @@ use View;
 use Session;
 use Redirect;
 use Illuminate\Support\Facades\DB;
+//use RealRashid\SweetAlert\Facades\Alert;
 use RealRashid\SweetAlert\Facades\Alert;
 
 //use RealRashid\SweetAlert\Facades\Alert;
@@ -42,7 +43,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return View::make('User.indexA',compact('user'));
+        return View::make('User.index',compact('user'));
     }
 
     /**
@@ -52,7 +53,7 @@ class UserController extends Controller
      */
     public function create()
     {
-       /* $user = new User();
+        /* $user = new User();
         $companys = DB::table('owners')->pluck('company');
         $companys_users = DB::table('owner_users')->pluck('name');
         $packages = DB::table('packages')->pluck('name');
@@ -90,8 +91,9 @@ class UserController extends Controller
             'status'=>$request['status'], 
         ]);
 
-       // Alert::success('Success', 'User created correctly');
+        Alert::success('Success', 'User created correctly');
         return redirect::to('user/index');*/
+
     }
 
     /**
@@ -102,7 +104,7 @@ class UserController extends Controller
      */
     public function show()
     {
-        Alert()->success('Success', 'User updated correctly')->autoClose(1800);
+        //Alert::success('Success', 'User updated correctly')->autoClose(1800);
         return View::make('home');
     }
 
@@ -141,13 +143,11 @@ class UserController extends Controller
             'country_code'=>$request['country_code'], 
             'phone_number'=>$request['phone_number'],            
         ]); 
-        $user->save();
+        $user->save(); 
 
-        
-           return View::make('home');
-
-       
+        $user=User::all();
        Alert::success('Success', 'User updated correctly')->autoClose(1800);
+       return View::make('User.index',compact('user'));
     }
 
     /**
@@ -158,26 +158,23 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
+        Alert::warning('Warning', 'destroyyyy')->autoClose(1800);
+       
         if($request->ajax()){
                 $id=$request->post('id');
               // $id=$request->get('id');
-
+            Alert::warning('Warning', 'primer   iffffffffffffff')->autoClose(1800);
                  if($id=='null'){
-                    //Alert::warning('Warning', 'Error User Data');
+                    Alert::warning('Warning', 'iffffffffffffff')->autoClose(1800);
                     return redirect::to('user/index');
+
                  }else{
 
-                       $_token=$request->get('_token');
-                      
-                        //dd($id);
-                       // $token=$request->get('_token');
-                        //dd($id);
-                        $valor=User::find($id)->delete();
-                        //dd($package);
-                        //=$package->delete();
-                        //dd($valor);
-                        
-                      //  Alert::success('Success', 'User Delete correctly')->autoClose(1800);
+                        Alert::success('Success', 'elseeeeeeeeeeeeeeeeeeee')->autoClose(1800);
+                       $_token=$request->get('_token');                      
+                        $valor=User::find($id)->delete();  
+
+                       // Alert::success('Success', 'User Delete correctly')->autoClose(1800);
                         return redirect()->route('user.index');
                         }
 

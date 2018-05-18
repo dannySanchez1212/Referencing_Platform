@@ -20,6 +20,7 @@ class EmailTest extends TestCase
     public function send_email_after_registration()
     {
         $this->withoutMiddleware();
+        Mail::fake();
 
         $user = factory(\App\User::class)->create([
             'email' => 'your_email@mail.com',
@@ -28,5 +29,11 @@ class EmailTest extends TestCase
 
         Mail::to($user)->send(new UserCreated($user));
 
+        Mail::assertSent(UserCreated::class, function($mail) use ($user){
+
+             return $mail->user->email === $user['email'];
+              
+        });
+            
     }
 }

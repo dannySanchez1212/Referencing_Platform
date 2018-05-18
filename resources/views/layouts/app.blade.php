@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
+
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +10,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Referencing Platform') }}</title>
+    <title>{{ __('Referencing Platform') }}</title>
 
-      @include('sweetalert::alert')
+     
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -18,6 +20,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <style>
@@ -26,15 +30,12 @@
             width: 100%;
             }
     </style>
-    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
- <!-- Scripts -->  
-   
-   <script src="{{ asset('js/sweetAlert/sw.js') }}"></script>
-
-</head>
+    <!-- -->
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+ </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-Referencing Platform">
@@ -85,20 +86,16 @@
                                     
                             </li>
                             <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        Creditionformer <span class="caret"></span>
-                                    </a>
+                                    <a class="nav-link" href="#" v-pre>Creditionformer</a>
                                     
                             </li>
 
 
                               <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                    @lang('Create Reference')<span class="caret"></span>
+                                                <a class="nav-link" href="{{ route('User.Reference') }}">
+                                                    @lang('Create Reference')
                                                 </a>
-                                                <ul class="dropdown-menu">
-                                                    <li ><a class="nav-link" href="{{ route('User.Reference') }}">Reference</a></li>                                                   
-                                                </ul>
+                                                
                                                 
                                         </li>
                                    @if(Auth::user()->name=='Admin')
@@ -107,7 +104,7 @@
                                                     @lang('User')<span class="caret"></span>
                                                 </a>
                                                 <ul class="dropdown-menu">
-                                                    <li ><a class="nav-link" href="{{ route('user.indexA') }}">User</a></li>
+                                                    <li ><a class="nav-link" href="{{ route('user.index') }}">User</a></li>
                                                     <li><a class="nav-link" href="{{ route('user.logueado') }}">logueado users</a></li> 
                                                 </ul>
                                                 
@@ -163,9 +160,10 @@
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
         <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-         @yield('scripts')
+       @yield('scripts')
 </body>
 </html>
