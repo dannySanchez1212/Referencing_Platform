@@ -2,6 +2,7 @@
 
 @section('content')
 
+@include('sweetalert::alert')
 <div class="container">
     @if($user->count())
     <table id="user" class="display nowrap">
@@ -46,7 +47,7 @@
             {
             $('#user').DataTable( 
                 {
-                "scrollY": 500,
+                "scrollY": 500,"scrollX": 500,
                 } );
             } );
     </script> 

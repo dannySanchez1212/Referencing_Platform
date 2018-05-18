@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('country_code');
             $table->string('auth_id')->nullable();
             $table->boolean('verified')->default(false);
+           // $table->dateTime('last_login')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

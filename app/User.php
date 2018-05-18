@@ -39,4 +39,10 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function fecha(){
+        return $this->belongsToMany('App\Fecha')->withTimestamps();
+    }
+
+
 }

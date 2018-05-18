@@ -10,13 +10,15 @@
 
     <title>{{ config('app.name', 'Referencing Platform') }}</title>
 
-   
+      @include('sweetalert::alert')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <style>
         div.dataTables_wrapper 
@@ -24,21 +26,21 @@
             width: 100%;
             }
     </style>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Styles 
     
-<script src="{{ asset('js/app.js') }}"></script> -->
- <!-- Scripts -->
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+ <!-- Scripts -->  
    
-   <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+   <script src="{{ asset('js/sweetAlert/sw.js') }}"></script>
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-Referencing Platform">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Referencing Platform') }}
+                    {{ __('Referencing Platform') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -61,16 +63,14 @@
                                 @if(Auth::user()->name)
 
                             <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        Postmark <span class="caret"></span>
-                                    </a>                                    
+                                    <a class="nav-link" href="#">Postmark</a>                                    
                             </li>
                             <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle"
                                      href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('Twilio')<span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <a href="{{ route('Twilio.Sms') }}">Send Sms</a>
+                                        <a class="nav-link" href="{{ route('Twilio.Sms') }}">Send Sms</a>
 
                                     </ul>                                   
                                     
@@ -80,7 +80,7 @@
                                         @lang('Docmail')<span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <a href="{{ route('user.docmail') }}">Send Docmail</a>
+                                        <a class="nav-link" href="{{ route('user.docmail') }}">Send Docmail</a>
                                     </ul>
                                     
                             </li>
@@ -90,14 +90,31 @@
                                     </a>
                                     
                             </li>
-                                   @if(Auth::user()->name=='Admin')
 
-                                    <li class="nav-item dropdown">
-                                    <a  class="nav-link dropdown-toggle" href=" {{ route('user.indexA') }} " role="button" aria-expanded="false" v-pre>
-                                        User <span class="caret"></span>
-                                    </a>
-                                    
-                            `       </li>
+
+                              <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                    @lang('Create Reference')<span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li ><a class="nav-link" href="{{ route('User.Reference') }}">Reference</a></li>                                                   
+                                                </ul>
+                                                
+                                        </li>
+                                   @if(Auth::user()->name=='Admin')
+                                         <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                    @lang('User')<span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li ><a class="nav-link" href="{{ route('user.indexA') }}">User</a></li>
+                                                    <li><a class="nav-link" href="{{ route('user.logueado') }}">logueado users</a></li> 
+                                                </ul>
+                                                
+                                        </li>                                             
+
+
+
                                    @endif
 
                             @endif
@@ -112,7 +129,15 @@
 
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('edit',Auth::user()->id) }}">
+                                     @if(Auth::user()->name=='Admin')
+
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                     @else
+                                            <a class="dropdown-item" href="{{ route('edit',Auth::user()->id) }}">
                                         {{ __('Edit') }}
                                     </a>
 
@@ -121,6 +146,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                     @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -137,7 +163,7 @@
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('js/app.js') }}"></script> 
+    <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
          @yield('scripts')

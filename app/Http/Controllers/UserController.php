@@ -21,6 +21,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function logueado(){
+
+       // $user = User::all();
+        $user = DB::table('fecha_user')->get();
+       // dd($user);
+        //dd($user[1]->user_id);
+        foreach ($user as $key => $value) {
+           $user[$key]->user_id=DB::table('users')->whereId($value->user_id)->value('name');
+           $user[$key]->created_at=DB::table('users')->whereName($value->user_id)->value('email'); 
+        }
+          
+        
+        //dd($user);
+       // dd($email);
+        return View::make('User.logueado',compact('user','email'));
+
+    }
     public function index()
     {
         $user = User::all();
@@ -82,9 +100,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        Alert()->success('Success', 'User updated correctly')->autoClose(1800);
+        return View::make('home');
     }
 
     /**
@@ -124,8 +143,11 @@ class UserController extends Controller
         ]); 
         $user->save();
 
-        Alert::success('Success', 'User updated correctly')->autoClose(5000);
-        return View::make('home');
+        
+           return View::make('home');
+
+       
+       Alert::success('Success', 'User updated correctly')->autoClose(1800);
     }
 
     /**

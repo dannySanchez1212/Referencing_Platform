@@ -25,7 +25,8 @@ Route::get('user/{id}/destroy',[
 	'uses'=>'UserController@destroy',
 	'as'  =>'user.destroy'
 ]);
-Route::post('/destroyU','OwnerController@destroy');
+Route::post('/destroyU','UserController@destroy');
+Route::get('/user/logueado','UserController@logueado')->name('user.logueado');
 ////Route::post('/profile/edit');////terminar
 /////////////////////////Twilio
 Route::get('/Twilio/Sms','TwilioController@index')->name('Twilio.Sms');
@@ -38,9 +39,13 @@ Route::post('/profile/phone','TwilioController@postConfirmPhone');
 Route::get('/SendSms','TwilioController@sendSms')->name('user.SendSms');
 
 
-
+Route::get('/prueba','UserController@show');
 ///////////docmail
 
 Route::get('/docmail','DocmailController@Docmail')->name('user.docmail');
+
+//////reference 
+
+Route::get('/reference','ReferenceController@conecion')->name('User.Reference');
 
 
