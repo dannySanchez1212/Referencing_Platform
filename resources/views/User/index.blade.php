@@ -8,11 +8,11 @@
     @if($user->count())
     <table id="user" class="display nowrap">
         <div class="card-header">{{ __('Users ') }} </div>
-        <p align="right"><a class="btn btn-primary" href="{{ route('register') }}" role="button">Add User </a></p>
+        <p align="right"><a class="btn btn-primary" href="{{ route('Register.neW') }}" role="button">Add User </a></p>
         <thead>
             <tr>
                 <th>User</th> 
-                <th>NAME</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Country Code</th>
                 <th>Phone Number</th>
@@ -61,7 +61,7 @@
                           
                          swal({
                           title: 'Are you sure?',
-                          text: " User Owner Successfully Removed!",
+                          text: " User Successfully Removed!",
                           type: 'warning',
                           showCancelButton: true,
                           confirmButtonColor: '#3085d6',
@@ -81,14 +81,14 @@
                               data:{id:id, _token:_token},
                               success:function(result){
 
-                                swal({ title:'Deleted!',text:"User Owner Successfully Removed",type:'success'});
+                                swal({ title:'Deleted!',text:"User Successfully Removed",type:'success'});
                                 location.reload();
                               }
 
                              })
                            } else if(result.dismiss == swal.DismissReason.cancel){
                             
-                            swal({ title:'Cancelled',text:"User Owner Successfully Not Removed",type:'error'});
+                            swal({ title:'Cancelled',text:"User Successfully Not Removed",type:'error'});
                             
                           }
                         })

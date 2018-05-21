@@ -8,8 +8,12 @@ use View;
 use Session;
 use Redirect;
 use Illuminate\Support\Facades\DB;
-//use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 //use RealRashid\SweetAlert\Facades\Alert;
 
@@ -46,62 +50,60 @@ class UserController extends Controller
         return View::make('User.index',compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        /* $user = new User();
-        $companys = DB::table('owners')->pluck('company');
-        $companys_users = DB::table('owner_users')->pluck('name');
-        $packages = DB::table('packages')->pluck('name');
-        $users_types = DB::table('user_types')->pluck('value');
-        $locations = DB::table('locations')->pluck('name');
+     public function create(){
 
-        return View::make('user.save',compact('user','companys','companys_users','packages','users_types','locations'));*/
-    }
+             return View::make('User.register');
+     } 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        /*$owner_id = DB::table('owners')->whereCompany($request['owner_id'])->value('id');
-        $owner_user_id = DB::table('owner_users')->whereName($request['owner_user_id'])->value('id');
-        $package_id = DB::table('packages')->whereName($request['package_id']) ->value('id');
-        $user_type_id = DB::table('user_types')->whereValue($request['user_type_id']) ->value('id');
-        $location_id = DB::table('locations')->whereName($request['location_id']) ->value('id');
+    public function registroN(Request $request)
+    {   
+       // dd($request);
+        $user=Auth::user(); 
+        
+        if (Auth::check()) {
 
-        User::create([
-            'owner_id'=>$owner_id, 
-            'owner_user_id'=>$owner_user_id,  
-            'package_id'=>$package_id,  
-            'user_type_id'=>$user_type_id, 
-            'name'=>$request['name'], 
-            'email'=>$request['email'], 
-            'password'=>$request['password'], 
-            'location_id'=>$location_id, 
-            'map'=>$request['map'], 
-            'activation_date'=>$request['activation_date'], 
-            'status'=>$request['status'], 
+                    //dd($user->name);
+
+                                if ($user->name=='Admin') {
+                                   
+                                $prueba= User::create([
+                                    'name' => $request['name'],
+                                    'email' => $request['email'],
+                                    'password' => bcrypt($request['password']),
+                                    'phone_number' => $request['phone_number'],
+                                    'country_code' => $request['country_code'],
+                                      ]);
+
+                                      //dd('aaaaaaaaaa'+$prueba);
+                                        Alert::success('Success', 'User created correctly')->autoClose(1800);
+                                        $user = User::all();
+                                       return View::make('user/index',compact('user'));
+                                  } else {
+                                        Alert::success('Error', 'without permission to create other users')->autoClose(1800);
+                                        $user = User::all();
+                                       return View::make('user/index',compact('user'));
+                                   }    
+                              
+
+            # code...
+        } else {
+
+            return User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => $request['password'],
+            'phone_number' => $request['phone_number'],
+            'country_code' => $request['country_code'],            
         ]);
+            Alert::success('Success', 'User created correctly')->autoClose(1800);                    
+            return redirect::to('home');
 
-        Alert::success('Success', 'User created correctly');
-        return redirect::to('user/index');*/
-
+        }
+        
+       // dd($user->name);
+       
+       // 
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
         //Alert::success('Success', 'User updated correctly')->autoClose(1800);

@@ -30,6 +30,10 @@ Route::get('user/{id}/destroy',[
 
 Route::post('/destroyU','UserController@destroy');
 Route::get('/user/logueado','UserController@logueado')->name('user.logueado');
+
+Route::get('/registerN','UserController@create')->name('Register.neW');
+
+Route::post('/User/register','UserController@registroN')->name('User.Resgistro');
 ////Route::post('/profile/edit');////terminar
 /////////////////////////Twilio
 Route::get('/Twilio/Sms','TwilioController@index')->name('Twilio.Sms');

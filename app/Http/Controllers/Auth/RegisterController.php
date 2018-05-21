@@ -32,18 +32,18 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    ///protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+   /* public function __construct()
     {
         $this->middleware('guest');
     }
-
+*/
     /**
      * Get a validator for an incoming registration request.
      *
@@ -77,6 +77,12 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'country_code' => $data['country_code'],
         ]);
-        Alert::success('Success', 'User created correctly');
+       // Alert::success('Success', 'User created correctly');
+    }
+
+    protected function Newregistro(){
+
+
+         return view('auth.register');
     }
 }

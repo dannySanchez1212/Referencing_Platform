@@ -107,7 +107,7 @@
                                                 </a>
                                                 <ul class="dropdown-menu">
                                                     <li ><a class="nav-link" href="{{ route('user.index') }}">User</a></li>
-                                                    <li><a class="nav-link" href="{{ route('user.logueado') }}">logueado users</a></li> 
+                                                    <li><a class="nav-link" href="{{ route('user.logueado') }}">Login Records</a></li> 
                                                 </ul>
                                                 
                                         </li>                                             
