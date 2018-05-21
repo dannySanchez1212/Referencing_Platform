@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    Mail::to($user)->send(new UserCreated($user));
+   // Mail::to($user)->send(new UserCreated($user));
     /**
      * The attributes that are mass assignable.
      *

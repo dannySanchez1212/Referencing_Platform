@@ -6,8 +6,7 @@
 <div class="container">
     @if($user->count())
     <table id="userLogueo" class="display nowrap">
-        <div class="card-header">{{ __('Users ') }} </div>
-        <p align="right"><a class="btn btn-primary" href="{{ route('register') }}" role="button">Add User </a></p>
+        <div class="card-header">{{ __('logueado users') }} </div>
         <thead>
             <tr>
                 <th>User</th> 

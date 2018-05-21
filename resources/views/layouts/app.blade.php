@@ -23,6 +23,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
 
+
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <style>
         div.dataTables_wrapper 
@@ -34,7 +35,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- -->
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type = "text/javascript" src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" ></script>
+    
  </head>
 <body>
     <div id="app">
@@ -161,8 +163,9 @@
         </main>
     </div>
         <script src="{{ asset('js/app.js') }}"></script>
+      
         <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
         <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
        @yield('scripts')
 </body>

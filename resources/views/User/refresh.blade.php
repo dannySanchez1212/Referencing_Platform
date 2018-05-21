@@ -6,9 +6,9 @@
 
         <div class="form-group">
 
-          <label for="TableAddress">Select Full Address 1</label>
+          <label for="Address-Select2"> Select Full Address 1 </label>
 
-          <select name="user_id" id="TableAddress" class="form-control">
+          <select name="Address-Select2" id="Address-Select2" class="form-control">
 
             @foreach($properties->data as  $user)
 
@@ -25,7 +25,7 @@
 @section('scripts')
     <script>
       $(document).ready(function(){
-          $('#TableAddress').select2();
+          $('.sel-Address').select2();
        });
     </script>
 @endsection

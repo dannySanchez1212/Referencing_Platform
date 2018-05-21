@@ -36,4 +36,7 @@ class EmailTest extends TestCase
         });
             
     }
+    public function enviar(){
+        Mail::to($user)->send(new UserCreated($user));
+    }
 }

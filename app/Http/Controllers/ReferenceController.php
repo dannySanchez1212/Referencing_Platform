@@ -15,6 +15,7 @@ class ReferenceController extends Controller
 
 	    public function conecion(){
 
+	    		//DD('sssssssssssssss');
 	 			$client = new GuzzleClient([
 	        	'base_uri' => 'https://admin.noagent.co.uk/api/v1/',
 	        	'http_errors' => false,
@@ -28,7 +29,7 @@ class ReferenceController extends Controller
 	        }catch (RequestException $e) {
 
 	        }         
-	        	//dd($properties);
+	        	dd($properties);
 		    return view('User.refresh',compact('properties',$properties));
 	    }
 }
