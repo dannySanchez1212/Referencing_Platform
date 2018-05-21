@@ -29,7 +29,7 @@ class ReferenceController extends Controller
 	        }catch (RequestException $e) {
 
 	        }         
-	        	dd($properties);
+	        	//dd($properties);
 		    return view('User.refresh',compact('properties',$properties));
 	    }
 }
