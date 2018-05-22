@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
 	    // Add Users
 	    $this->call(UserTableSeeder::class);
         // faker eliminar es solo prueba
-        $this->call(fakerTableSeeder::class);
+      //  $this->call(fakerTableSeeder::class);
     }
 }
