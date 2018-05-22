@@ -80,9 +80,5 @@ class RegisterController extends Controller
        // Alert::success('Success', 'User created correctly');
     }
 
-    protected function Newregistro(){
-
-
-         return view('auth.register');
-    }
+    
 }

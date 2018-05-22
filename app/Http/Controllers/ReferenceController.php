@@ -14,7 +14,7 @@ class ReferenceController extends Controller
 
 	    }
 
-	    public function conecion(){
+	    public function Connection(){
 
 	    		//DD('sssssssssssssss');
 	 			$client = new GuzzleClient([
@@ -37,15 +37,16 @@ class ReferenceController extends Controller
 
 	    public function update(Request $request){
 
-	    	    $Select = $request->get('select');
-                 $value = $request->get('value');
+	    	   // $Select = $request->get('select');
+              //   $value = $request->get('value');
 
                  	//dd($Select);
-                 	dd($value);
+                 	//dd($value);
+                 	dd($request);
 
 	    	                     Db::table('reference')->insert([
                                     'id_reference' =>  $Select,
-                                    'full_address' => $value,                                 
+                                    'full_address' => $request->Address-Select2,                                 
                                       ]);
 
                                      

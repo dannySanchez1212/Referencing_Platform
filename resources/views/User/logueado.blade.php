@@ -6,11 +6,11 @@
 <div class="container">
     @if($user->count())
     <table id="userLogueo" class="display nowrap">
-        <div class="card-header">{{ __('logueado users') }} </div>
+        <div class="card-header">{{ __('Login Records') }} </div>
         <thead>
             <tr>
                 <th>User</th> 
-                <th>NAME</th>
+                <th>Name</th>
                 <th>Email</th>                
                 <th>Log in</th>
 

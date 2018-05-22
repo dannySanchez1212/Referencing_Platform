@@ -9,21 +9,23 @@
            <form method="POST" action="{{ route('Reference.update') }}">
                         @csrf
 
-          <label for="Address-Select2"> Select Full Address 1 </label>
-          
-          <select value="Address-Select2" id="{{ $user->id }}" class="form-control input-lg dynamic" name="Address-Select2"  class="form-control">
+          <label for="AddressSelect2" class="col-md-4 col-form-label text-md-right"> {{ __(' Select Full Address 1 ') }}</label>
+                       
 
-            @foreach($properties->data as  $user)
+                             <select value="AddressSelect2" id="AddressSelect2" class="form-control input-lg dynamic" name="AddressSelect2"  class="form-control">
+                              <option value="AddressSelect2" id="AddressSelect2" selected="selected" class="{{$errors->has('Address-Select2') ? ' is-invalid' : '' }}" >Select Full Address 1 </option>
+                                         
+                                      @foreach($properties->data as  $user)
 
-            <option selected="selected" name= "Address-Select2" id="{{ $user->id }}" value="{{ $user->full_address }}" class="{{$errors->has('Address-Select2') ? ' is-invalid' : '' }}" required autofocus> {{ $user->full_address }} </option>          
-                              
-             
-            @endforeach
+                                      <option selected="selected" name= "AddressSelect2" id="{{$user->id}}" value="{{ $user->full_address }}" class="{{$errors->has('AddressSelect2') ? ' is-invalid' : '' }}" required autofocus> {{ $user->full_address }} </option>          
+                                                        
+                                       
+                                      @endforeach
 
-          </select>
-            @if ($errors->has('Address-Select2'))
+                                    </select>
+                                      @if ($errors->has('AddressSelect2'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('Address-Select2') }}</strong>
+                                        <strong>{{ $errors->first('AddressSelect2') }}</strong>
                                     </span>
                                 @endif
 
@@ -35,6 +37,7 @@
                                 </button>
                             </div>
                         </div>
+                      
                     </form>
         </div> 
 </div>
@@ -48,6 +51,6 @@
        });
     </script>
 
-   <script src="/js/Select/select.js"></script>
+ <!--  <script src="/js/Select/select.js"></script> -->
 
 @endsection

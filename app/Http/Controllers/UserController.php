@@ -33,17 +33,24 @@ class UserController extends Controller
         $user = DB::table('fecha_user')->get();
        // dd($user);
         //dd($user[1]->user_id);
+        if ($user) {
         foreach ($user as $key => $value) {
            $user[$key]->user_id=DB::table('users')->whereId($value->user_id)->value('name');
            $user[$key]->created_at=DB::table('users')->whereName($value->user_id)->value('email'); 
         }
           
+              # code...
+          }else{
+
+            return  Alert::success('Error', 'no users logged in')->autoClose(1800);
+          }
         
         //dd($user);
        // dd($email);
         return View::make('User.logueado',compact('user','email'));
 
     }
+
     public function index()
     {
         $user = User::all();
@@ -55,7 +62,7 @@ class UserController extends Controller
              return View::make('User.register');
      } 
 
-    public function registroN(Request $request)
+    public function new_record(Request $request)
     {   
        // dd($request);
         $user=Auth::user(); 

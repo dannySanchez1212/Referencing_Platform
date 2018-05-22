@@ -62,10 +62,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Telefono" class="col-md-4 col-form-label text-md-right">{{ __('Numero de Telefono') }}</label>
+                            <label for="Telefono" class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
 
                             <div class="col-md-2">
-                                <input id="country_code" type="text" placeholder="Codigo de Pais" class="form-control{{ $errors->has('country_code') ? ' is-invalid' : '' }}" name="country_code"  required>
+                                <input id="country_code" type="text" placeholder="Country code" class="form-control{{ $errors->has('country_code') ? ' is-invalid' : '' }}" name="country_code" value="{{ $user->country_code }}" required>
 
                                 @if ($errors->has('country_code'))
                                     <span class="invalid-feedback">
@@ -75,7 +75,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <input id="phone_number" type="text" placeholder="Numero de Telefono Movil" class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" name="phone_number"  required>
+                                <input id="phone_number" type="text" placeholder="Phone number" class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" name="phone_number" value="{{ $user->phone_number }}" required>
 
                                 @if ($errors->has('phone_number'))
                                     <span class="invalid-feedback">
@@ -83,6 +83,7 @@
                                     </span>
                                 @endif
                             </div>
+
 
                         </div>
 
