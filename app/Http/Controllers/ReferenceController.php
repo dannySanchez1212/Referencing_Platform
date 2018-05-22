@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client as GuzzleClient;
 use App\Property;
+use Illuminate\Support\Facades\DB;
 
 
 class ReferenceController extends Controller
@@ -31,5 +32,24 @@ class ReferenceController extends Controller
 	        }         
 	        	//dd($properties);
 		    return view('User.refresh',compact('properties',$properties));
+	    }
+
+
+	    public function update(Request $request){
+
+	    	    $Select = $request->get('select');
+                 $value = $request->get('value');
+
+                 	//dd($Select);
+                 	dd($value);
+
+	    	                     Db::table('reference')->insert([
+                                    'id_reference' =>  $Select,
+                                    'full_address' => $value,                                 
+                                      ]);
+
+                                     
+                        return true;               
+
 	    }
 }

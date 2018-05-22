@@ -34,6 +34,7 @@ Route::get('/user/logueado','UserController@logueado')->name('user.logueado');
 Route::get('/registerN','UserController@create')->name('Register.neW');
 
 Route::post('/User/register','UserController@registroN')->name('User.Resgistro');
+
 ////Route::post('/profile/edit');////terminar
 /////////////////////////Twilio
 Route::get('/Twilio/Sms','TwilioController@index')->name('Twilio.Sms');
@@ -54,5 +55,5 @@ Route::get('/docmail','DocmailController@Docmail')->name('user.docmail');
 //////reference 
 
 Route::get('/reference','ReferenceController@conecion')->name('User.Reference');
-
+Route::post('/reference/update','ReferenceController@update')->name('Reference.update');
 

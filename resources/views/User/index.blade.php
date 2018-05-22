@@ -7,8 +7,14 @@
 <div class="container">
     @if($user->count())
     <table id="user" class="display nowrap">
-        <div class="card-header">{{ __('Users ') }} </div>
-        <p align="right"><a class="btn btn-primary" href="{{ route('Register.neW') }}" role="button">Add User </a></p>
+              <div  class="card-header" style="padding-top: 0px;padding-bottom: 0px;border-top-width: 10px;border-bottom-width: 10px;"> 
+                  <p style="padding-top: 0px; padding-bottom: 0px;" >
+                     <ul style="padding-top: 0px; padding-bottom: 0px;">{{ __('Users ') }}                         
+                           <a align="right" class="btn btn-primary" href="{{ route('Register.neW') }}" style="float: right;" role="button">Add User </a>
+                         </p>
+                     </ul>
+                  
+              </div>
         <thead>
             <tr>
                 <th>User</th> 
@@ -16,7 +22,7 @@
                 <th>Email</th>
                 <th>Country Code</th>
                 <th>Phone Number</th>
-                <th>ACTIONS</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
