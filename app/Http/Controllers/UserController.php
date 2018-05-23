@@ -30,7 +30,7 @@ class UserController extends Controller
     public function logueado(){
 
        // $user = User::all();
-        $user = DB::table('fecha_user')->get();
+        $user = DB::table('login_Records_user')->get();
        // dd($user);
         //dd($user[1]->user_id);
         if ($user) {
@@ -181,9 +181,10 @@ class UserController extends Controller
 
                         Alert::success('Success', 'elseeeeeeeeeeeeeeeeeeee')->autoClose(1800);
                        $_token=$request->get('_token');                      
-                        $valor=User::find($id)->delete();  
+                        $valor=User::find($id)->delete();
 
-                       // Alert::success('Success', 'User Delete correctly')->autoClose(1800);
+                       $user_id=DB::table('login_Records_user')->whereUser_id($id)->delete();
+
                         return redirect()->route('user.index');
                         }
 

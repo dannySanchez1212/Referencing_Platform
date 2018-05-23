@@ -29,7 +29,7 @@ class SuccessfulLogin
     {
 
         
-        DB::table('fecha_user')->insert([
+        DB::table('login_Records_user')->insert([
             'user_id'=>$event->user->id,
             'log_in'=> new DateTime()
 

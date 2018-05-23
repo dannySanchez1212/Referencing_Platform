@@ -2,22 +2,31 @@
 
 @section('content')
 @include('sweetalert::alert')
-<div class="container">
+<div class="container" >
          
         <div class="form-group">
-            <?php $users=$properties->data ?>
+            
+
+          
+            <div class="card-header" style="border-top-width: 10px;border-bottom-width: 10px; border-bottom-color: rgba(255,255,255,0.9);" > {{ __(' Select Full Address 1 ') }} </div>
+
            <form method="POST" action="{{ route('Reference.update') }}">
                         @csrf
 
-          <label for="AddressSelect2" class="col-md-4 col-form-label text-md-right"> {{ __(' Select Full Address 1 ') }}</label>
-                       
+                   <label for="AddressSelect2" class="col-md-4 col-form-label text-md-right"></label>
+                      
 
-                             <select value="AddressSelect2" id="AddressSelect2" class="form-control input-lg dynamic" name="AddressSelect2"  class="form-control">
-                              <option value="AddressSelect2" id="AddressSelect2" selected="selected" class="{{$errors->has('Address-Select2') ? ' is-invalid' : '' }}" >Select Full Address 1 </option>
+                        <div class="form-group row" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;" >
+
+                          <div class="col-md-8">
+
+                             <select class="form-control sel-Address" name="AddressSelect2"  class="form-control" >
+
+                              <option value="AddressSelect2" id="AddressSelect2" selected="selected" class="{{$errors->has('AddressSelect2') ? ' is-invalid' : '' }}" >Select Full Address 1 </option>
                                          
                                       @foreach($properties->data as  $user)
 
-                                      <option selected="selected" name= "AddressSelect2" id="{{$user->id}}" value="{{ $user->full_address }}" class="{{$errors->has('AddressSelect2') ? ' is-invalid' : '' }}" required autofocus> {{ $user->full_address }} </option>          
+                                      <option selected="selected" name= "AddressSelect2" id="{{$user->id}}" value="{{ $user->id }}" class="{{$errors->has('AddressSelect2') ? ' is-invalid' : '' }}" required autofocus> {{ $user->full_address }} </option>          
                                                         
                                        
                                       @endforeach
@@ -29,16 +38,18 @@
                                     </span>
                                 @endif
 
+                               </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button value="boton" type="submit" class="btn btn-primary" name="boton" id="boton">
-                                    {{ __('update') }}
-                                </button>
-                            </div>
+                                <div class="col-md-2" align="right">
+                                    <div class="col-md-6 offset-md-4">
+                                        <button value="boton" type="submit" class="btn btn-primary" name="boton" id="boton" onclick="accion();">
+                                            {{ __('Update') }}
+                                        </button>
+                                    </div>
+                                </div>
                         </div>
-                      
                     </form>
+           
         </div> 
 </div>
  
@@ -50,7 +61,5 @@
           $('.sel-Address').select2();
        });
     </script>
-
- <!--  <script src="/js/Select/select.js"></script> -->
-
+<script src="/js/Select/select.js"></script>
 @endsection

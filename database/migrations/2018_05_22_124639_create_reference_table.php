@@ -17,6 +17,10 @@ class CreateReferenceTable extends Migration
             $table->increments('id');
             $table->string('id_reference');
             $table->string('full_address');
+            $table->string('address_lines')->nullable();
+            $table->string('building_name')->nullable();
+            $table->string('address_1')->nullable();
+            $table->string('address_2')->nullable();
         });
     }
 
