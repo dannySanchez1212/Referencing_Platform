@@ -6,7 +6,7 @@
 <div class="container">
     @if($user->count())
     <table id="userLogueo" class="display nowrap" >
-        <div class="card-header">{{ __('Login Records') }} </div>
+        <div class="card-header" style="overflow: hidden;" >{{ __('Login Records') }} </div>
         <ul style="border-top-width: 10px;border-bottom-width: 10px; border-bottom-color: rgba(255,255,255,0.9); height: auto ! important;"></ul>
         <thead>
             <tr>

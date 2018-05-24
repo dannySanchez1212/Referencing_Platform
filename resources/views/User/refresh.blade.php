@@ -8,7 +8,7 @@
             
 
           
-            <div class="card-header" style="border-top-width: 10px;border-bottom-width: 10px; border-bottom-color: rgba(255,255,255,0.9);" > {{ __(' Select Full Address 1 ') }} </div>
+            <div class="card-header" style="border-top-width: 10px;border-bottom-width: 10px; border-bottom-color: rgba(255,255,255,0.9); overflow: hidden; " > {{ __(' Select Full Address 1 ') }} </div>
 
            <form method="POST" action="{{ route('Reference.update') }}">
                         @csrf
@@ -20,9 +20,9 @@
 
                           <div class="col-md-8">
 
-                             <select class="form-control sel-Address" name="AddressSelect2"  class="form-control" >
+                                   <select class="form-control sel-Address" name="AddressSelect2"  class="form-control" >
 
-                              <option value="AddressSelect2" id="AddressSelect2" selected="selected" class="{{$errors->has('AddressSelect2') ? ' is-invalid' : '' }}" >Select Full Address 1 </option>
+                                    <option value="AddressSelect2" id="AddressSelect2" selected="selected" class="{{$errors->has('AddressSelect2') ? ' is-invalid' : '' }}" >Select Full Address 1 </option>
                                          
                                       @foreach($properties->data as  $user)
 
@@ -43,7 +43,7 @@
                                 <div class="col-md-2" align="right">
                                     <div class="col-md-6 offset-md-4">
                                         <button value="boton" type="submit" class="btn btn-primary" name="boton" id="boton" onclick="accion();">
-                                            {{ __('Update') }}
+                                            {{ __('Create') }}
                                         </button>
                                     </div>
                                 </div>

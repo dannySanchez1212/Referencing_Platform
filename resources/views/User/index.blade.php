@@ -8,13 +8,14 @@
     @if($user->count())
     <table id="user" class="display nowrap">
 
-              <div  class="card-header" > 
+              <div  class="card-header" style="overflow: hidden; padding-top: 6px;padding-bottom: 6px;"  > 
                   
                         
 
-                            {{ __('Users ') }}                         
+                          {{ __('Users ') }}                          
                            
-                           <a align="right" class="btn btn-primary" href="{{ route('Register.neW') }}"  role="button" style="float: right;">Add User </a>
+                          
+                           <a align="right" class="btn btn-primary" href="{{ route('Register.neW') }}"  role="button" style="float:right; text-align:right;">Add User </a>
                           
                           
                      

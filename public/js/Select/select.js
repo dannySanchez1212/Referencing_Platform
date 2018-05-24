@@ -22,7 +22,7 @@ $('#boton').on('click',function(){
 
 			success:function(){
                   alert('event boton'+$(this).val());
-				  swal({ title:'success!',text:"Update Reference",type:'success'});
+				  swal({ title:'success!',text:"Reference created",type:'success'});
                                 location.reload();
 
 			}

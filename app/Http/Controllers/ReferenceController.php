@@ -87,7 +87,7 @@ class ReferenceController extends Controller
 	    	                       );
 	    	                     }
 
-	    	             Alert::success('Success', 'User updated correctly')->autoClose(1800);
+	    	             Alert::success('Success', 'Reference created')->autoClose(1800);
                          return View::make('home');       
                     
                
