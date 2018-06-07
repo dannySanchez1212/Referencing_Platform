@@ -9,9 +9,15 @@ use View;
 use Session;
 use Redirect;
 use Illuminate\Support\Facades\DB;
+use Twilio;
 class TwilioController extends Controller
 {
-    //
+     public function __construct()
+    {
+        // Only Authenticated Users can access
+        $this->middleware('auth');
+    }
+
     
 
     public function index(){
@@ -36,11 +42,11 @@ class TwilioController extends Controller
 
         $mensaje=$client->account->messages->create(array(
         	'From'=>'+19412144935',
-        	'To'=>'+584126464956',
+        	'To'=>'+5215514328313',
         	'body' =>$sendSms
         ));
 
-       // echo "resultado=".$mensaje->sid;
+       // echo "resultado=".$mensaje->sid;   +19412144935
 
 		//dd($phone_number);
 		//$twilio->messages->create();

@@ -34,5 +34,8 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+     
+     'postmark'=>[
+            'api_key'=>env('POSTMARK_SECRET'),
+     ],
 ];

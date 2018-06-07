@@ -66,29 +66,21 @@
                                 @if(Auth::user()->name)
 
                             <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#">Postmark</a>                                    
+                                    <a class="nav-link" href="{{  route('Postmark') }}">@lang('Postmark')</a>                                    
                             </li>
                             <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle"
-                                     href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('Twilio')<span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <a class="nav-link" href="{{ route('Twilio.Sms') }}">Send Sms</a>
-
-                                    </ul>                                   
+                                    <a class="nav-link " href="{{ route('Twilio.Sms') }}">@lang('Twilio')</a>                                                                     
                                     
                             </li>
                             <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        @lang('Docmail')<span class="caret"></span>
+                                    <a class="nav-link " href="{{ route('Docmail.index') }}">
+                                        @lang('Docmail')
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <a class="nav-link" href="{{ route('user.docmail') }}">Send Docmail</a>
-                                    </ul>
+                                    
                                     
                             </li>
                             <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" v-pre>Creditionformer</a>
+                                    <a class="nav-link" href="#" v-pre>@lang('Creditinformer')</a>
                                     
                             </li>
 

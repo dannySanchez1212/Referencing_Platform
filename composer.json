@@ -12,11 +12,15 @@
         "fzaninotto/faker": "^1.7",
         "guzzlehttp/guzzle": "^6.3",
         "hpolthof/laravel-docmail": "^0.1.1",
+        "kartik-v/bootstrap-fileinput": "^4.4",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "realrashid/sweet-alert": "^1.1",
+        "twbs/bootstrap": "4.1.1",
         "twilio/sdk": "^5.19",
-        "yajra/laravel-datatables-oracle": "~8.0"
+        "wildbit/postmark-php": "^2.5",
+        "yajra/laravel-datatables-oracle": "~8.0",
+        "znarkus/postmark": "^0.1.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

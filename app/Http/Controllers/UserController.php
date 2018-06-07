@@ -19,13 +19,12 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 class UserController extends Controller
 {
-    //
+     public function __construct()
+    {
+        // Only Authenticated Users can access
+        $this->middleware('auth');
+    }
 
-/**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function logueado(){
 
