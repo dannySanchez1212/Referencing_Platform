@@ -10,6 +10,8 @@ use Session;
 use Redirect;
 use Illuminate\Support\Facades\DB;
 use Twilio;
+use \SendGrid;
+use RealRashid\SweetAlert\Facades\Alert;
 class TwilioController extends Controller
 {
      public function __construct()
@@ -28,49 +30,47 @@ class TwilioController extends Controller
     }
 
     public function send(Request $request){   			
+      
+       
+            $account_sid = env('TWILIO_SID', 'smtp'); 
 
-        $accountId='AC1f1439c38896ad3d4c679d0ebc1766d9';
-        $token='c6111d7dfdce534168f957f463b2e8ae';
-		$fromNumber='+9412144935';
-		$client = new Client($accountId, $token);
+            $auth_token = env('TWILIO_TOKEN', 'smtp'); 
+            
+            $client = new Twilio\Rest\Client($account_sid, $auth_token); 
+             
+            $messages = $client->messages->create("+584126464956", array( 
+                    'From' => env('TWILIO_NUMBER', 'smtp'),  
+                    'Body' => $request->sms      
+              ));
 
-		
-		$phone_number_send=$request['phone_number'];
-		$country_code_send=$request['country_code'];
-		$phone_number=$country_code_send.$phone_number_send;
-		$sendSms=$request['sms'];
-
-        $mensaje=$client->account->messages->create(array(
-        	'From'=>'+19412144935',
-        	'To'=>'+5215514328313',
-        	'body' =>$sendSms
-        ));
-
-       // echo "resultado=".$mensaje->sid;   +19412144935
-
-		//dd($phone_number);
-		//$twilio->messages->create();
-		//$envio=Twilio::message($phone_number,$sendSms);
-       // dd($envio); 19412144935     
-
-
-
-						        // Use the client to do fun stuff like send text messages!
-					/*	$smsE=$client->messages->create(
-						    // the number you'd like to send the message to
-						    '+584126464956',
-						    array(
-						        // A Twilio phone number you purchased at twilio.com/console
-						        'from' => '+584126464956',
-						        // the body of the text message you'd like to send
-						        'body' =>$sendSms
-						    )
-						); */  
-						//dd($smsE);
+     Alert::success('Success', 'Message Sent Successfully')->autoClose(1800);
+     return redirect::to('Twilio');
      }
 
 
 
+  public function SelectUserSendSms(Request $request){
+
+    $Select = $request->get('select');
+    //print $Select;
+    $value = $request->get('value');
+   // print $value;
+    $dependent = $request->get('dependent');
+     //print $dependent;
+
+                $user = User::find($value);
+                       //   echo $user;
+
+                        $phone=$user->country_code.' '.$user->phone_number;
+                        $dependent='phone_number';
+                        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+                        
+                        $output .= '<option value="'.$phone.'">'.$phone.'</option>';
+                        
+                        echo $output;
+                    
+               
+  }
     
 
 
@@ -82,7 +82,15 @@ class TwilioController extends Controller
 		//dd($twilio);    	
        $envio=Twilio::message('+5804126464956', 'Pink Elephants and Happy Rainbows');
        dd($envio);
+    Alert::success('Success', 'Message Sent Successfully')->autoClose(1800);
+
      }
+
+
+    public function prueba(){
+
+    
+    }
 
     public function requestSms(){}
 

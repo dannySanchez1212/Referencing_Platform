@@ -21,40 +21,95 @@
            <form method="POST" action="{{ route('Docmail.send') }}" enctype="multipart/form-data" accept-charset="UTF-8" >
                         @csrf
 
+                        <div class="container"  style=" display: flex ; justify-content: center ; border-style: solid ; border-color: #E6E6E6 ;border-width: 10px; width: 602px; justify-content: space-around;padding-top: 15px;padding-bottom: 15px;padding-left: 0px; margin-bottom: 5px;" >
+                                      <div class="form-group row" id="div2" style="width: 90%;">
+                                      
+                                       <label for="Twilio">{{ __('Select User When Sending Email') }}</label>
+                                                               
 
-                     <div class="container" style="border-style: solid ; border-color: #E6E6E6 ;border-width: 10px; width: 600px; height: 100%;">
+                                                                <div style="padding-bottom: 10px;padding-left: 45px;">
+
+                                                                   <select style="width: 200px;" class="form-control sel-User dynamic" name="user" id="user"  data-placeholder="Select User" data-dependent="country_code" required >
+                                                                      <option name="user">Select user</option>
+                                                                      @foreach($users as  $use)
+                                                                      <option name="user" id="{{$use->id}}" value="{{ $use->id }}" class="{{$errors->has('user') ? ' is-invalid' : '' }}"  required autofocus> {{ $use->name }} </option>         @endforeach
+                                                                    </select>
+
+                                                                      @if ($errors->has('user'))
+                                                                    <span class="invalid-feedback">
+                                                                        <strong>{{ $errors->first('user') }}</strong>
+                                                                    </span>
+                                                                      @endif
+
+                                                               </div>  
+
+                                              </div>
+
+                                              <div class="form-group row" id="div3" style="display:none;justify-content: center; margin-top: 10px;">
+                                                                <label  for="Telefono">{{ __('Email Selected') }}</label>
+                                                                
+                                                                <div class="col-md-6">
+
+                                                                    <select style="width: 200px;" id="country_code" type="text" name="country_code" class="form-control input-lg dynamic" required>
+
+                                                                       <option value="country_code" name="country_code" id="country_code" placeholder="Country code" class="{{$errors->has('country_code') ? ' is-invalid' : '' }}" ></option> 
+                                                                    </select>
+
+                                                                  
+
+                                                                    @if ($errors->has('country_code'))
+                                                                        <span class="invalid-feedback">
+                                                                            <strong>{{ $errors->first('country_code') }}</strong>
+                                                                        </span>
+                                                                    @endif
+                                                                </div>
+                                                              </div> 
+                                                
+
+
+
+                                    </div>
+
+
+
+
+                     <div class="container" id="div1" style="border-style: solid ; border-color: #E6E6E6 ;border-width: 10px; ; height: 140%; display:none; justify-content: center; width:602px;">
                                  <meta charset="utf-8">
                                  <style>
                                  body { padding: 30px }
                                  form { display: block; margin: 20px auto; background: #eee; border-radius: 10px; padding: 15px }
                                  
-                                 .progress { position:relative; width:600px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+                                 .progress { position:relative; width:602px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
                                  .bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
                                  .percent { position:absolute; display:inline-block; top:3px; left:48%; }
                                  </style>
                                 
                                 <ul></ul>
-                                       
-                                                <div class="container" style="display: flex;justify-content: center;">
-                                                        <div class="form-group">
+                                                     <div class="form-group" style="width: 150% !important;  margin-top: 10px;">
+                                                      
+                                                            
+                                                        <div class="container">
                                                                      
-                                                       <br>
+                                                      
                                                         <div class="file-loading">
-                                                            <input id="archivo" type="file" name="archivo[]" accept=".pdf" class="file" data-preview-file-type="text" multiple>
+                                                            <input id="archivo" type="file" name="archivo[]" accept=".pdf" class="file" data-preview-file-type="text" size="500" multiple>
                                                         </div>
-                                                         </div>                                              
-                                                    </div>
-
-                                                        <br>
-                                                       <div class="container" style="display: flex;justify-content: center;padding-top: 5px;">     
-                                                            <button type="submit" class="btn btn-success" style="margin-right: 10px;">Submit</button>
-                                                            <button type="reset" class="btn btn-warning">Reset</button>
-                                                      </div>
+                                                                                                    
+                                                     
+                                                        </div>  
+                                                        
                                                        
+                                                      
+                                                     </div>   
 
                                         
                                         <ul></ul>
                         </div>
+
+                       <div class="container" id="button" style="display:none;justify-content: center; margin-top: 10px;">
+                                                            <button type="submit" class="btn btn-success" style="margin-right: 10px; padding-top: 5px;" href="{{ route('Docmail.send') }}" >Submit</button>
+                                                        
+                                                        </div>  
                  </form>
         </div> 
 </div>
@@ -73,6 +128,7 @@
     <script src="/input/Jquery/popper.min.js" type="text/javascript"></script>
 <script src="/js/Docmail/jquery.form.js"></script>
 <script src="/js/Docmail/DinamicInput.min.js"></script>
+<script src="/user/select_User_Docmail.js"></script>
 <script>
     var tipos=['pdf'];
     var contadores=[0,0,0,0];
@@ -96,6 +152,7 @@ var input=$('#archivo');
         uploadUrl: '#',
         showRemove: false,
         showUpload: false,
+        lavelUpload:false,
        removeFromPreviewOnError:true,
        allowedFileExtensions: tipos
 

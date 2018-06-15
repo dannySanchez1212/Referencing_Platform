@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use nusoap_client;
+use SoapClient;
+use Zend;
 class DocmailController extends Controller
 {
-
+   
 	 public function __construct()
     {
         // Only Authenticated Users can access
@@ -26,13 +28,14 @@ class DocmailController extends Controller
 
     public function index(){
 
-      $user=User::all();
+      $users=User::all();
       $email=Auth::user()->email;
-      return View::make('Docmail.index',compact('user','email'));   
+      return View::make('Docmail.index',compact('users','email'));   
     }
 	
     public function Docmail(Request $request){        
- 					//dd($request);
+ 					//dd($request->user);
+
     					$user=Auth::user();
     					//dd($user);
     	             $file = $request->file('archivo'); 
@@ -70,4 +73,50 @@ class DocmailController extends Controller
     
 			return Alert::success('Success', 'File Saved Correctly')->autoClose(1800);
     }
+
+    public function send_docmail(Request $request){
+           dd($request);
+    		 //require_once __DIR__ . '/vendor/autoload.php';
+         
+          $client = new Zend\Soap\Client(config('docmail.connection.wsdl'), true);
+        dd($client);
+       /*   $result = $client->sayHello(['firstName' => 'World']);
+
+          echo $result->sayHelloResult;
+
+
+
+           $this->client = new \nusoap_client(config('docmail.connection.wsdl'), true);
+        $this->client->timeout = config('docmail.connection.timeout');
+
+        $this->addresses = new Collection();
+        $this->setMailing(new DocmailMailing());
+
+        $this->submitAfterSend = config('docmail.submit_after_send', false);
+        $this->paymentMethod = config('docmail.paymentmethod', 'Invoice');
+    }*/
+    }
+
+     public function SelectUserSendEmail(Request $request){
+
+    $Select = $request->get('select');
+    //print $Select;
+    $value = $request->get('value');
+   // print $value;
+    $dependent = $request->get('dependent');
+     //print $dependent;
+
+                $user = User::find($value);
+                       //   echo $user;
+
+                        //$phone=$user->country_code.' '.$user->phone_number;
+                        $dependent='Email';
+                        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+                        
+                        $output .= '<option value="'.$user->email.'">'.$user->email.'</option>';
+                        
+                        echo $output;
+                    
+               
+  }
 }

@@ -38,17 +38,26 @@ Route::get('user/{id}/destroy',[
 
 ////Route::post('/profile/edit');////terminar
 /////////////////////////Twilio
-Route::get('/Twilio/Sms','TwilioController@index')->name('Twilio.Sms');
+Route::get('/Twilio','TwilioController@index')->name('Twilio.Sms');
 Route::post('/Twilio/Send','TwilioController@send')->name('Twilio.send');
 Route::get('/profile/phone/send','TwilioController@requestSms');
 Route::get('/profile/phone','TwilioController@getConfirmPhone');
 Route::post('/profile/phone','TwilioController@postConfirmPhone');
 Route::get('/SendSms','TwilioController@sendSms')->name('user.SendSms');
+Route::post('/Twilio/Select','TwilioController@SelectUserSendSms');
+Route::get('/Twilio/Select/{id}','TwilioController@SelectUserSendSms');
+
+Route::get('/prueba','TwilioController@prueba');
 
 
 ///////////docmail
 Route::get('/Docmail','DocmailController@index')->name('Docmail.index');
-Route::post('/Docmail/send','DocmailController@Docmail')->name('Docmail.send');
+
+Route::post('/Docmail/send','Send_DocmailController@__construct')->name('Docmail.send');
+//Route::post('/Docmail/send','DocmailController@Docmail')->name('Docmail.send');
+
+Route::post('/Docmail/Select','DocmailController@SelectUserSendEmail');
+Route::get('/Docmail/Select/{id}','DocmailController@SelectUserSendEmail');
 
 Route::get('files/{archivo}', function ($archivo) {
      $public_path = public_path();

@@ -68,6 +68,7 @@ class ReferenceController extends Controller
 				    }  
 
 			//dd($user_data);
+				    dd(json_encode($properties));
 	        $users=$properties;
 	       // dd($users);
 
