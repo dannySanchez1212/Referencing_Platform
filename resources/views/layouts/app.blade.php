@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ __('Referencing Platform') }}</title>
@@ -157,6 +158,9 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+      
+
     </div>
         <script src="{{ asset('js/app.js') }}"></script>
       
@@ -165,4 +169,10 @@
         <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
        @yield('scripts')
 </body>
+<!--   
+
+    display: flex; align-items: flex-end !important ; justify-content: center; height: 54px;padding-bottom: 6px;padding-top: 6px;
+
+-->
+
 </html>

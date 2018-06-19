@@ -66,4 +66,20 @@
         </div>
     </div>
 </div>
+
 @endsection
+<footer style="position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 51px;display: flex;justify-content: center;">
+  <div class="card-header" style="border-top-width: 1px;border-bottom-width: 1px; border-bottom-color: rgba(255,255,255,0.9);display: flex;justify-content: center; width: 100%;"> 
+
+                
+                        <ul>
+                         Reserved Program Rights   
+                         Program Version: {{ env('PROGRAM_VERSION', 'smtp') }} 
+                        </ul>
+
+               
+       </div> 
+</footer>
