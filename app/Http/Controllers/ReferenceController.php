@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client as GuzzleClient;
 use App\Property;
+use App\Applications;
 use App\User;
 use View;
 use Session;
@@ -29,7 +30,7 @@ class ReferenceController extends Controller
 
 	    public function Connection(){
 
-	    		//DD('sssssssssssssss');
+	    		//Propertys
 	 			$client = new GuzzleClient([
 	        	'base_uri' => 'https://admin.noagent.co.uk/api/v1/',
 	        	'http_errors' => false,
@@ -67,16 +68,54 @@ class ReferenceController extends Controller
 					     );
 				    }  
 
-			//dd($user_data);
-				    dd(json_encode($properties));
+			
 	        $users=$properties;
-	       // dd($users);
+	     
+               //Applications
+
+	 			$this->httpClient = new GuzzleClient([
+	        	'base_uri' => 'http://admin.noagent.co.uk/api/v1/',
+	        	'http_errors' => false
+	        ]);
+
+	 			$this->headers=[
+		 				'verify' => false,
+	                    'allow_redirects' => true,
+	 					'headers'=>[
+	 							'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwcnAiOiJhcGkiLCJzYnQiOiJ1c2VyIiwic3ViIjoxMTA4LCJwZXIiOnsiYXBpLnByb3BlcnRpZXMuKiI6MSwiYXBpLmFwcGxpY2F0aW9ucy4qIjoxfSwiZXhwIjozMzA2NDM5MzI0MH0.dINvERJtEo6PY5h_ztrPILG6KHS7DUy2IDbKtKSHgW8'
+	 					]
+	 			];	
+
+	 			$this->response=$this->httpClient->get('applications',$this->headers);
+                $data=json_decode($this->response->getBody()->getContents());
+	        
+                	////////
+
+                           foreach ($data as $key=> $applications) {
+			                 $db_campaign = Applications::UpdateOrcreate(
+										['id'  => $applications->id],
+										[
+								          "contact_by_email"=>$applications->contact_by_email, 
+									        "contact_by_phone"=>$applications->contact_by_phone,
+									        "prequal_link"=>$applications->prequal_link,
+									        "source_id"=>$applications->source->id,
+									        "source_display_name"=>$applications->source->display_name,
+									        "source_key_name"=>$applications->source->key_name
+								        ]
+					     );
+				    } 
+
+                    ////////
+
+           dd($this);
+            dd( json_decode($this->response->getBody()->getContents()) );
+			//dd($user_data);
 
 		    return view('User.refresh',compact('properties'));
 	    }
 
 
-	    public function update(Request $request){
+ public function update(Request $request){
 
 	    		 
 	    		$reference = Property::find($request->AddressSelect2);
@@ -125,19 +164,9 @@ class ReferenceController extends Controller
 	    }
 
 
-	    public function Crate_reference(Request $request){
-
-	    	
-
-				// Create a PSR-7 request object to send
-				$headers = ['Authorization' => 'Bearer wphlVsCz1MMqkhqhAYYrVliOp3ZcpayX'];
-				//$body = 'Hello!';
-				$request = new Request('HEAD', 'http://admin.noagent.co.uk/api/v1/applications/states/{state}', $headers);
-				$promise = $client->sendAsync($request);
-				dd($promise);
-	    }
+	    
 
 
-
+      
 
 }

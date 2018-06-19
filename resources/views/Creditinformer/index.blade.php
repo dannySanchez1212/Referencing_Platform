@@ -5,7 +5,7 @@
 <div class="container">
     <div class="form-group">
               
-                <div class="card-header" style=" border-top-width: 10px;border-bottom-width: 10px; border-bottom-color: rgba(255,255,255,0.9); overflow: hidden; ">{{ __('Send Sms') }}</div>
+                <div class="card-header" style=" border-top-width: 10px;border-bottom-width: 10px; border-bottom-color: rgba(255,255,255,0.9); overflow: hidden; ">{{ __('Creditinformer') }}</div>
 
                   <div class="container" style="display: flex ; justify-content: center ;">
                     <form method="POST" action="{{ route('Twilio.send') }}">
@@ -15,14 +15,13 @@
                                     <div class="container" style=" display: flex ; justify-content: center ; border-style: solid ; border-color: #E6E6E6 ;border-width: 10px; width: 602px; justify-content: space-around;padding-top: 15px;padding-bottom: 15px;padding-left: 0px; margin-bottom: 5px;" >
                                       <div class="form-group row" style="width: 90%;">
                                       
-                                       <label for="Twilio">{{ __('Select User When Sending SMS') }}</label>
+                                       <label for="Twilio">{{ __('Select User') }}</label>
                                                                
 
                                                                 <div style="padding-bottom: 10px;padding-left: 45px;">
 
                                                                    <select style="width: 200px;" class="form-control sel-User dynamic" name="user" id="user"  data-placeholder="Select User" data-dependent="country_code" required >
                                                                                                                                            
-                                                                     <option name="user">Select User</option>
                                                                       @foreach($users as  $use)
                                                                       <option name="user" id="{{$use->id}}" value="{{ $use->id }}" class="{{$errors->has('user') ? ' is-invalid' : '' }}"  required autofocus> {{ $use->name }} </option>         @endforeach
                                                                     </select>

@@ -18,8 +18,17 @@ use nusoap_client;
 use SoapClient;
 use Zend;
 
+
 class Send_DocmailController extends Controller
 {
+
+   public function Send_DocmailController(Request $request)
+    {
+        self::__construct($request);
+    }
+
+
+
    public function __construct(Request $request)
     {
         //  solution only for connection with php <4.3
@@ -66,3 +75,6 @@ class Send_DocmailController extends Controller
 			return redirect::to('Docmail');
     }
 }
+
+
+?>

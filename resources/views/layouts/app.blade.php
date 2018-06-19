@@ -79,9 +79,13 @@
                                     
                                     
                             </li>
+
                             <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" v-pre>@lang('Creditinformer')</a>
-                                    
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>@lang('Creditinformer')<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="nav-link" href="{{ route('Creditinformer.index') }}">Document Verification</a></li>
+                                        <li><a class="nav-link" href="#">Credit Checks</a></li>
+                                    </ul>
                             </li>
 
 

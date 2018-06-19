@@ -22,8 +22,7 @@
 
                                                                 <div class="col-md-10" style="padding-bottom: 10px;padding-left: 45px;">
 
-                                                                   <select style="width: 450px;" class="form-control sel-User" name="from_email[]" multiple="multiple" class="form-control" data-placeholder="Select Email">
-                                                                                                                                           
+                                                                   <select style="width: 450px;" class="form-control sel-User" name="from_email[]" multiple="multiple" class="form-control" data-placeholder="Select Email">                                                                   
                                                                       @foreach($user as  $use)
                                                                       <option  id="{{$use->id}}" value="{{ $use->id }}" class="{{$errors->has('from_email') ? ' is-invalid' : '' }}"  required autofocus> {{ $use->email }} </option>         @endforeach
                                                                     </select>

@@ -36,7 +36,6 @@ Route::get('user/{id}/destroy',[
 
 
 
-////Route::post('/profile/edit');////terminar
 /////////////////////////Twilio
 Route::get('/Twilio','TwilioController@index')->name('Twilio.Sms');
 Route::post('/Twilio/Send','TwilioController@send')->name('Twilio.send');
@@ -51,6 +50,7 @@ Route::get('/prueba','TwilioController@prueba');
 
 
 ///////////docmail
+
 Route::get('/Docmail','DocmailController@index')->name('Docmail.index');
 
 Route::post('/Docmail/send','Send_DocmailController@__construct')->name('Docmail.send');
@@ -80,3 +80,6 @@ Route::post('/reference/update','ReferenceController@update')->name('Reference.u
 //////Postmark
 Route::get('/Postmark','PostmarkController@index')->name('Postmark');
 Route::post('/Postmark/Send','PostmarkController@sendEmail')->name('Postmark.SendEmail');
+
+//////Creditinformer
+Route::get('/Creditinformer','CreditinformerController@index')->name('Creditinformer.index');
