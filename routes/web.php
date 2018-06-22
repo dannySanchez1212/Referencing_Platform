@@ -82,4 +82,5 @@ Route::get('/Postmark','PostmarkController@index')->name('Postmark');
 Route::post('/Postmark/Send','PostmarkController@sendEmail')->name('Postmark.SendEmail');
 
 //////Creditinformer
-Route::get('/Creditinformer','CreditinformerController@index')->name('Creditinformer.index');
+Route::get('/Creditinformer/Document','CreditinformerController@Document')->name('Creditinformer.Document');
+Route::get('/Creditinformer/Credit','CreditinformerController@Credit')->name('Creditinformer.Credit');

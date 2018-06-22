@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 Use Faker\Factory;
 use App\User;
 use App\Role;
+USE App\Applications;
 
 class fakerTableSeeder extends Seeder
 {
@@ -27,7 +28,14 @@ class fakerTableSeeder extends Seeder
         $user->save();
        // $user->roles()->attach($role_admin);
 
-
+        $Applications = new Applications();
+        $Applications->contact_by_email=true;
+        $Applications->contact_by_phone=true;
+        $Applications->prequal_link=$faker->url;
+        $Applications->source_id=$faker->randomDigitNotNull;
+        $Applications->source_display_name=$faker->name;
+        $Applications->source_key_name=$faker->name;
+        $Applications->save();
         }
     }
 }

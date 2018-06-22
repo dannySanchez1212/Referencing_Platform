@@ -24,12 +24,16 @@ class CreditinformerController extends Controller
         $this->middleware('auth');
     }
 
-   public function index(){
+   public function Document(){
 
    	 $users=User::all();
       $email=Auth::user()->email;
-      return View::make('Creditinformer.index',compact('users','email')); 
+      return View::make('Creditinformer.Document',compact('users','email')); 
    }
 
-
+   public function Credit(){
+    $users=User::all();
+      $email=Auth::user()->email;
+      return View::make('Creditinformer.Credit',compact('users','email')); 
+   }
 }

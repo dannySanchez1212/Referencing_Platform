@@ -1,6 +1,6 @@
 $('#boton').on('click',function(){
 	
-	//alert($propertis[1]->data->id);
+	
 
    // alert('event boton'+$(this).val());
 

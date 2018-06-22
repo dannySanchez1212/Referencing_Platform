@@ -5,24 +5,23 @@
 <div class="container">
     <div class="form-group">
               
-                <div class="card-header" style=" border-top-width: 10px;border-bottom-width: 10px; border-bottom-color: rgba(255,255,255,0.9); overflow: hidden; ">{{ __('Send Sms') }}</div>
+                <div class="card-header" style=" border-top-width: 10px;border-bottom-width: 10px; border-bottom-color: rgba(255,255,255,0.9); overflow: hidden; ">{{ __('Creditinformer') }}</div>
 
                   <div class="container" style="display: flex ; justify-content: center ;">
                     <form method="POST" action="{{ route('Twilio.send') }}">
                         {{ csrf_field() }}
                         @csrf
                                 <label for="TwilioSendSms" class="col-md-4 col-form-label text-md-right"></label>                                           
-                                    <div class="container" style=" display: flex ; justify-content: center ; border-style: solid ; border-color: #E6E6E6 ;border-width: 10px; width: 602px; justify-content: space-around;padding-top: 15px;padding-bottom: 15px;padding-left: 0px; margin-bottom: 5px;" >
-                                      <div class="form-group row" style="width: 90%;margin-bottom: 0px;">
+                                    <div class="container" style="display: flex;justify-content: space-around;border-style: solid;border-color: rgb(230, 230, 230);border-width: 10px;width: 602px;padding-top: 15px;padding-bottom: 15px;padding-left: 15px;margin-bottom: 5px;" >
+                                      <div class="form-group row" style="display: flex;justify-content: center;margin-bottom: 0px;">
                                       
-                                       <label for="Twilio">{{ __('Select User When Sending SMS') }}</label>
+                                       <label for="Twilio">{{ __('Select User') }}</label>
                                                                
 
                                                                 <div style="padding-bottom: 10px;padding-left: 45px;">
 
                                                                    <select style="width: 200px;" class="form-control sel-User dynamic" name="user" id="user" data-dependent="country_code" required >
-                                                                                                                                           
-                                                                     <option name="user">Select User</option>
+                                                                       <option name="user">Select User</option>                                                                  
                                                                       @foreach($users as  $use)
                                                                       <option name="user" id="{{$use->id}}" value="{{ $use->id }}" class="{{$errors->has('user') ? ' is-invalid' : '' }}"  required autofocus> {{ $use->name }} </option>         @endforeach
                                                                     </select>
@@ -90,6 +89,19 @@
                  </div>
               </div>             
           </div>
+               <div class="form-group" id="link" style="display: flex;justify-content: center;">
+                              
+                                                <iframe src="https://html.hazunaweb.com/"
+
+                                            width="600" height="400" scrolling="auto">
+
+                                            Texto alternativo para navegadores que no aceptan iframes
+
+                                            </iframe>
+
+                                            <object type="text/html" data="https://app.noagent.co.uk/apply/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwcnAiOiJhcGkiLCJzYnQiOiJ1c2VyIiwic3ViIjoxMTA4LCJleHAiOjMzMDY0MzkzMjQwLCJwZXIiOnsiYXBpLnByb3BlcnRpZXMuKiI6MSwiYXBpLmFwcGxpY2F0aW9ucy4qIjoxfX0.YrNXHlHYVW7jQvJE7HDzS8tYrz9tvuIXYQ3D4Ll3mbY" width="400" height="400"> </object> 
+
+                            </div>   
     </div>
 @endsection
 @section('scripts')

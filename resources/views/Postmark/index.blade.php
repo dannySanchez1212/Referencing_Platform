@@ -15,7 +15,7 @@
                      
                         <div class="container" style="display: flex; justify-content: center; border-style: solid ; border-color: #E6E6E6 ;border-width: 10px; width: 602px;padding-top: 10px;padding-bottom: 5px;" >
                                 
-                                              <div class="form-group row" style="display: flex; justify-content: center;">
+                                              <div class="form-group row" style="display: flex; justify-content: center;margin-bottom: 0px;">
 
                                                                  <label for="Email">{{ __('From') }}</label>
                                                                

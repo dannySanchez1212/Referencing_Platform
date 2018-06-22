@@ -22,7 +22,7 @@
                         @csrf
 
                         <div class="container"  style=" display: flex ; justify-content: center ; border-style: solid ; border-color: #E6E6E6 ;border-width: 10px; width: 602px; justify-content: space-around;padding-top: 15px;padding-bottom: 15px;padding-left: 0px; margin-bottom: 5px;" >
-                                      <div class="form-group row" id="div2" style="width: 90%;">
+                                      <div class="form-group row" id="div2" style="width: 90%;margin-bottom: 0px;">
                                       
                                        <label for="Twilio">{{ __('Select User When Sending Email') }}</label>
                                                                

@@ -72,12 +72,12 @@ class ReferenceController extends Controller
 	        $users=$properties;
 	     
                //Applications
-
+ /*
 	 			$this->httpClient = new GuzzleClient([
 	        	'base_uri' => 'http://admin.noagent.co.uk/api/v1/',
 	        	'http_errors' => false
 	        ]);
-
+            
 	 			$this->headers=[
 		 				'verify' => false,
 	                    'allow_redirects' => true,
@@ -109,9 +109,11 @@ class ReferenceController extends Controller
 
            dd($this);
             dd( json_decode($this->response->getBody()->getContents()) );
-			//dd($user_data);
+			//dd($user_data);*/
 
-		    return view('User.refresh',compact('properties'));
+           $applications=Applications::all();
+         //  dd($applications);
+		    return view('User.refresh',compact('properties','applications'));
 	    }
 
 
