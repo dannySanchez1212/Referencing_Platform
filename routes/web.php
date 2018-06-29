@@ -76,7 +76,11 @@ Route::get('files/{archivo}', function ($archivo) {
 
 Route::get('/reference','ReferenceController@Connection')->name('User.Reference');
 Route::post('/reference/update','ReferenceController@update')->name('Reference.update');
+Route::POST('/Petition','ReferenceController@Petition_Applications'); 
 
+Route::POST('/PetitionURL','ReferenceController@Petition_URL');
+
+Route::get('/PetitionURLprueba/{id}','ReferenceController@prueba');
 //////Postmark
 Route::get('/Postmark','PostmarkController@index')->name('Postmark');
 Route::post('/Postmark/Send','PostmarkController@sendEmail')->name('Postmark.SendEmail');

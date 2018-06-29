@@ -2,6 +2,7 @@
 
 @section('content')
 @include('sweetalert::alert')
+
 <div class="container" >         
         <div class="form-group">         
             
@@ -61,7 +62,13 @@
                                                                           </span>
                                                                       @endif
                                                              </div> 
-                                        </div>                                
+                                                          
+                                                          
+                                        </div>    
+
+
+
+                                                                
                         </div>
                     
 
@@ -73,6 +80,9 @@
                                                 </button>
                                             
                                         </div>
+
+                                       <!-- <div class="inputDiv i1"></div> -->
+                                        
                     </form>
         </div> 
 </div>
@@ -86,4 +96,100 @@
        });
     </script>
 
+<script type="text/javascript">
+// una nueva hoja de estilo
+var nuevaHojaDeEstilo = document.createElement("style");
+document.head.appendChild(nuevaHojaDeEstilo);
+
+// los elementos padre dondeponer los sliders
+var elementoPadre1 = document.querySelector(".inputDiv.i1");
+var inputsRy = [];
+
+function Input(id) {
+ // alert('idinput '+id);
+  //<input type="range" value="35" min="0" max="100" autocomplete="off" step="1">
+  this.att = {};
+  this.att.type ="range";
+  this.att.id = id;
+  this.att.value = 100;
+  this.att.min = 0;
+  this.att.max = 100;
+  this.att.autocomplete = "off";
+  this.att.step = "1";
+  this.color = {};
+  this.color.a = "blue"; // la parte "baja" del slider
+  this.color.b = "Black"; // la parte "alta" del slider
+  this.input;
+  this.output;
+  this.interval = this.att.max - this.att.min;
+
+  this.crear = function(elementoPadre) {
+    this.input = document.createElement("input");
+    this.output = document.createElement("div");
+    this.output.innerHTML = this.att.value+'%';
+    this.output.setAttribute("class", "output");
+    for (var name in this.att) {
+      if (this.att.hasOwnProperty(name)) {
+        this.input.setAttribute(name, this.att[name]);
+      }
+    }
+    elementoPadre.appendChild(this.input);
+    elementoPadre.appendChild(this.output);
+
+    this.CSSstyle();
+  }
+  
+  this.actualizar = function() {
+    this.output.innerHTML = this.input.value+'%';
+    this.att.value = this.input.value;
+    this.CSSstyle();
+  }
+  
+  this.CSSstyle = function() {
+   // alert('#id'+this.att.id);
+    // calcula la posición del thumb en porcentajes
+    this.porcentaje = ((this.att.value - this.att.min) / this.interval) * 100;
+    // establece las nuevas reglas CSS
+    this.style = "#" + this.att.id + "::-webkit-slider-runnable-track{ background-image:-webkit-linear-gradient(left, " + this.color.a + " " + this.porcentaje + "%, " + this.color.b + " " + this.porcentaje + "%)}\n";
+    this.style += "#" + this.att.id + "::-moz-range-track{ background-image:-moz-linear-gradient(left, " + this.color.a + " " + this.porcentaje + "%, " + this.color.b + " " + this.porcentaje + "%)}\n";
+  }
+}
+
+function actualizarCSS() {
+  // una cadena de texto donde guardar los estilos
+  var HojaCSS = "";
+  for (var i = 0; i < inputsRy.length; i++) {
+    HojaCSS += inputsRy[i].style;
+  }
+  nuevaHojaDeEstilo.textContent = HojaCSS;
+}
+
+// setup
+var i = new Input("itr1");
+i.crear(elementoPadre1);
+inputsRy.push(i);
+
+actualizarCSS();
+
+
+
+for (var n = 0; n < inputsRy.length; n++) {
+  (function(n) {
+    inputsRy[n].input.addEventListener("input", function() {
+      inputsRy[n].actualizar();
+      actualizarCSS();
+
+    }, false)
+  }(n));
+}
+</script>
+<script >
+ $(document).ready(function()
+   {
+    //alert('id'+this.id);
+  $('#itr1').change(function() {
+   alert('seleciono  :'+this.value);
+   });
+ });
+</script> 
 @endsection

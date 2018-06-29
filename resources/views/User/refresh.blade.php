@@ -23,7 +23,7 @@
                                           <label class="col-md-3" id="labelPro1">{{__('Select Property')}}</label>
                                           
                                           <div id="Property1" class="col-md-7" style=" padding-left: 5px; width: 50px !important;">
-                                               <select style="width:350px" id="Address" class="form-control sel-Address input-lg dynamic" name="AddressSelect2" lass="form-control input-lg dynamic" data-placeholder="Select Address" data-dependent="applications">
+                                               <select style="width:350px" id="Address" class="form-control sel-Address input-lg dynamic" name="AddressSelect2" lass="form-control input-lg dynamic" data-dependent="applications">
                                                     
                                                   <option selected="selected" >Select Property</option>
                                                   @foreach($properties->data as  $user)
@@ -57,14 +57,12 @@
                                                  </dir>
                                                   <div  class="col-md-7" style="padding-left: 5px;margin-left: 20px;">
 
-                                                    <SELECT style="width:350px margin-left: 20px;" Value="applications" id="applications" name="applications" class="form-control input-lg dynamic" data-dependent="city">
+                                                    <SELECT style="width:350px margin-left: 20px;" id="applications" class="form-control input-lg dynamic" data-dependent="URL" required>
 
-                                                      <option selected="selected" >Select Offer</option>
-
-                                                      @foreach($applications as $appli)  
-                                                        <option value="{{ $appli->source_display_name }}" id="applications"  class="{{$errors->has('applications') ? ' is-invalid' : '' }}" >{{$appli->source_display_name}}</option>
-                                                      @endforeach 
-
+                                                      
+                                                       
+                                                        <option value="applications"  id="applications"  class="{{$errors->has('applications') ? ' is-invalid' : '' }}" ></option>
+                                                     
                                                     </SELECT>   
 
                                                       @if ($errors->has('applications'))
@@ -79,44 +77,42 @@
                                       
                             <div id="buttonoffer1" style="display: flex;justify-content: center; display: none;">
 
+                                     <div id="frame1" class="form-group" id="link" style="display: flex;justify-content: center;">
+                                        
+                                                          <iframe id="URL">browser does not support the iframe component</iframe>
+
+                                                      <object id="URL" name="URL" type="text/html" width="400" height="400"sandbox="allow-scripts allow-same-origin allow-forms"> </object> 
+
+                                      </div> 
+                                      
+
+
+
                                        <div class="container"  style="border-style: solid;border-color: rgb(230, 230, 230);border-width: 10px;width: 69%;padding-top: 10px;padding-bottom: 5px; justify-content: center;margin-top: 5px;" >                           
                                  
-                                        <div class="form-group row" style="width: 100%;display: flex;justify-content: center;padding-right: 40px;margin-top: 0px;margin-bottom: 0px;padding-left: 50px;">
+                                            <div class="form-group row" style="width: 100%;display: flex;justify-content: center;padding-right: 40px;margin-top: 0px;margin-bottom: 0px;padding-left: 50px;">
 
 
-                                              <div  class="col-md-9" style=" display: flex; justify-content: center; padding-left: 80px;" >
-                                                          
-                                                              <button value="boton" type="submit" class="btn btn-primary" name="boton" id="boton" onclick="accion();">
-                                                                  {{ __('Create') }}
-                                                              </button>
-                                              </div> 
+                                                  <div  class="col-md-9" style=" display: flex; justify-content: center; padding-left: 80px;" >
+                                                              
+                                                                  <button value="boton" type="submit" class="btn btn-primary" name="boton" id="boton" onclick="accion();">
+                                                                      {{ __('Create') }}
+                                                                  </button>
+                                                  </div> 
 
-                                        </div>
-                                   </div>
+                                            </div>
+                                      </div>                           
 
-                             
-
-                            <div id="frame1" class="form-group" id="link" style="display: flex;justify-content: center;">
-                              
-                                                <iframe src="https://html.hazunaweb.com/"
-
-                                            width="600" height="400" scrolling="auto">
-
-                                            Texto alternativo para navegadores que no aceptan iframes
-
-                                            </iframe>
-
-                                            <object type="text/html" data="http://www.lapaginaweb.loquesea" width="400" height="400"> </object> 
-
-                            </div>                      
+                                                           
                         </div>
                      
                     </form>
            
-         <div class="container"  id="buttons" style="display: flex;justify-content: center;padding-top: 5px;  display: none;">
-                <button class="btn btn-danger" style="margin-right: 10px;">Send Twilio</button>
-                <button class="btn btn-warning">Send Postmark</button>
-        </div>
+                   
+                   <div class="container"  id="buttons" style="display: flex;justify-content: center;padding-top: 5px;  display: none;">
+                          <button class="btn btn-danger" style="margin-right: 10px;">Send Twilio</button>
+                          <button class="btn btn-warning">Send Postmark</button>
+                  </div>
         </div> 
 </div>
  
@@ -128,13 +124,29 @@
           $('.sel-Address').select2();
        });
     </script>
-<!-- buttons frame1 buttonoffer1 offer1 labeloffer1 
-<script src="/js/Select/select.js"></script>-->
+
 <script type="text/javascript">
   $('#Address').change(function (){
   document.getElementById('offer1').style.display ='inherit';
   document.getElementById('offer1').style.display ='flex';
+
+  var id = $(this).attr("name"); 
+  var dependent = $(this).data('dependent');
+  //alert('id=    '+id);
+ // alert('depndent=    '+dependent);
+                 var _token = '{{csrf_token()}}';
   
+   $.ajax({
+                              url:"/Petition",
+                              method:"POST",
+                              data:{id:id, _token:_token,dependent:dependent},
+                              success:function(result){                                
+                               $('#'+dependent).html(result);
+                              }
+
+                             })
+
+
   });
   
   $('#applications').change(function (){
@@ -142,6 +154,28 @@
   document.getElementById('buttonoffer1').style.display ='flex';
   document.getElementById('buttons').style.display ='inherit';
   document.getElementById('buttons').style.display ='flex';
+
+
+ var id = $(this).attr("id"); 
+  var value = $(this).val();
+  alert('value '+value);
+  var dependent = $(this).data('dependent');
+  //alert('id=    '+id);
+  //alert('depndent=    '+dependent);
+                 var _token = '{{csrf_token()}}';
+  
+   $.ajax({
+                              url:"/PetitionURL",
+                              method:"POST",
+                              data:{id:id, value:value, _token:_token,dependent:dependent},
+                              success:function(result){                               
+                               $('#'+dependent).html(result);
+                              }
+
+                             })
+
+
+
   });
 </script>
 

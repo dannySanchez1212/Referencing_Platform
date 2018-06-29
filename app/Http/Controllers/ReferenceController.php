@@ -17,11 +17,92 @@ use GuzzleHttp\Psr7\Res;
 
 class ReferenceController extends Controller
 {
-	    public function __construct()
+	public function __construct()
     {
         // Only Authenticated Users can access
         $this->middleware('auth');
     }
+         public function prueba($id){
+		   //  $id=$request->get('value');
+		    // print $id;
+		   // $dependent = $request->get('dependent');
+		  // print $dependent;
+	                  
+                  $Applications=Applications::find($id);
+          // dd($Applications->prequal_link);
+                  $output = '<IFRAME src=""></IFRAME>';
+				    //foreach ($Applications as $applications) {                   
+                       // $output .= '<IFRAME src="'.$Applications->prequal_link.'"></IFRAME>';
+
+                        print $Applications->prequal_link;                
+                      //  }
+                       // echo $output;
+     }
+
+
+
+    public function Petition_URL(Request $request){
+		     $id=$request->get('value');
+		    // print $id;
+		    $dependent = $request->get('dependent');
+		  // print $dependent;
+	                  
+                 $Applications=Applications::find($id);
+                  //$Applications=Applications::all();
+          /// dd($Applications);
+                  //$output = '<IFRAME src=""></IFRAME>';
+                 // $output.='<object date=""> </object> ';
+				   // foreach ($Applications as $applications) {                   
+                        $output = '<IFRAME id="'.$dependent.'" src="'.$Applications->prequal_link.'"></IFRAME>';
+                       // $output.='<object date="'.$applications->prequal_link.'"> </object> ';
+                       // print $applications->prequal_link;                
+                       // }
+                        echo $output;
+     }
+
+
+
+     public function Petition_Applications(Request $request){
+     
+    $dependent = $request->get('dependent');
+   //  print $dependent;
+
+     /*	$Client = new GuzzleClient(['base_uri' => 'http://admin.noagent.co.uk/api/v1/']);
+               // dd($Client);
+	 			$headers=[		 				
+	 							'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwcnAiOiJhcGkiLCJzYnQiOiJ1c2VyIiwic3ViIjoxMTA4LCJwZXIiOnsiYXBpLnByb3BlcnRpZXMuKiI6MSwiYXBpLmFwcGxpY2F0aW9ucy4qIjoxfSwiZXhwIjozMzA2NDM5MzI0MH0.dINvERJtEo6PY5h_ztrPILG6KHS7DUy2IDbKtKSHgW8',
+	 							'Accept'        => 'application/json'
+	 					
+	 			];
+	 			  	
+	 			$response=$Client->request('GET','applications',[
+	 				 'headers'=>$headers
+	 			]);
+
+                  //dd($response);
+	 			foreach ($response as $key=> $applications) {
+			                 $db_campaign = Applications::UpdateOrcreate(
+										['id'  => $applications->id],
+										[
+								          "contact_by_email"=>$applications->contact_by_email, 
+									        "contact_by_phone"=>$applications->contact_by_phone,
+									        "prequal_link"=>$applications->prequal_link,
+									        "source_id"=>$applications->source->id,
+									        "source_display_name"=>$applications->source->display_name,
+									        "source_key_name"=>$applications->source->key_name
+								        ]
+					     );
+				    }	*/ 	
+                
+                  $Applications=Applications::all();
+           //dd($Applications);
+                  $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+				    foreach ($Applications as $applications) {                   
+                        $output .= '<option name="'.$applications->id.'" value="'.$applications->id.'">'.$applications->source_display_name.'</option>';
+                        print $applications->id;                
+                        }
+                        echo $output;
+     }
 
 	   
 	    public function index(){
@@ -29,7 +110,7 @@ class ReferenceController extends Controller
 	    }
 
 	    public function Connection(){
-
+             ini_set('max_execution_time', 180);
 	    		//Propertys
 	 			$client = new GuzzleClient([
 	        	'base_uri' => 'https://admin.noagent.co.uk/api/v1/',
@@ -69,29 +150,36 @@ class ReferenceController extends Controller
 				    }  
 
 			
-	        $users=$properties;
+	       // $users=$properties;
 	     
                //Applications
- /*
-	 			$this->httpClient = new GuzzleClient([
-	        	'base_uri' => 'http://admin.noagent.co.uk/api/v1/',
-	        	'http_errors' => false
-	        ]);
-            
-	 			$this->headers=[
-		 				'verify' => false,
-	                    'allow_redirects' => true,
-	 					'headers'=>[
-	 							'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwcnAiOiJhcGkiLCJzYnQiOiJ1c2VyIiwic3ViIjoxMTA4LCJwZXIiOnsiYXBpLnByb3BlcnRpZXMuKiI6MSwiYXBpLmFwcGxpY2F0aW9ucy4qIjoxfSwiZXhwIjozMzA2NDM5MzI0MH0.dINvERJtEo6PY5h_ztrPILG6KHS7DUy2IDbKtKSHgW8'
-	 					]
-	 			];	
+ 
+	 		/*	$Client = new GuzzleClient(['base_uri' => 'http://admin.noagent.co.uk/api/v1/']);
+               // dd($Client);
+	 			$headers=[		 				
+	 							'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwcnAiOiJhcGkiLCJzYnQiOiJ1c2VyIiwic3ViIjoxMTA4LCJwZXIiOnsiYXBpLnByb3BlcnRpZXMuKiI6MSwiYXBpLmFwcGxpY2F0aW9ucy4qIjoxfSwiZXhwIjozMzA2NDM5MzI0MH0.dINvERJtEo6PY5h_ztrPILG6KHS7DUy2IDbKtKSHgW8',
+	 							'Accept'        => 'application/json'
+	 					
+	 			];
+	 			  	
+	 			$response=$client->request('GET','applications',[
+	 				 'headers'=>$headers
+	 			]);	 			
+                
+                 dd($response);*/
 
-	 			$this->response=$this->httpClient->get('applications',$this->headers);
-                $data=json_decode($this->response->getBody()->getContents());
+
+
+
+
+
+
+
+	 			/*$this->response=$this->httpClient->get('applications',$this->headers);
+                $data=json_decode($this->response->getBody()->getContents());*/
 	        
-                	////////
 
-                           foreach ($data as $key=> $applications) {
+                         /*  foreach ($data as $key=> $applications) {
 			                 $db_campaign = Applications::UpdateOrcreate(
 										['id'  => $applications->id],
 										[
@@ -103,17 +191,17 @@ class ReferenceController extends Controller
 									        "source_key_name"=>$applications->source->key_name
 								        ]
 					     );
-				    } 
+				    }*/ 
 
                     ////////
 
-           dd($this);
-            dd( json_decode($this->response->getBody()->getContents()) );
-			//dd($user_data);*/
+          // dd($response);
+           // dd( json_decode($this->response->getBody()->getContents()) );
+			//dd($user_data);
 
-           $applications=Applications::all();
+           
          //  dd($applications);
-		    return view('User.refresh',compact('properties','applications'));
+		    return view('User.refresh',compact('properties'));
 	    }
 
 
