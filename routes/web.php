@@ -80,7 +80,7 @@ Route::POST('/Petition','ReferenceController@Petition_Applications');
 
 Route::POST('/PetitionURL','ReferenceController@Petition_URL');
 
-Route::get('/PetitionURLprueba/{id}','ReferenceController@prueba');
+Route::get('/PetitionURLprueba','ReferenceController@prueba');
 //////Postmark
 Route::get('/Postmark','PostmarkController@index')->name('Postmark');
 Route::post('/Postmark/Send','PostmarkController@sendEmail')->name('Postmark.SendEmail');

@@ -77,26 +77,21 @@
                                       
                             <div id="buttonoffer1" style="display: flex;justify-content: center; display: none;">
 
-                                     <div id="frame1" class="form-group" id="link" style="display: flex;justify-content: center;">
-                                        
-                                                          <iframe id="URL">browser does not support the iframe component</iframe>
-
-                                                      <object id="URL" name="URL" type="text/html" width="400" height="400"sandbox="allow-scripts allow-same-origin allow-forms"> </object> 
-
-                                      </div> 
                                       
-
-
 
                                        <div class="container"  style="border-style: solid;border-color: rgb(230, 230, 230);border-width: 10px;width: 69%;padding-top: 10px;padding-bottom: 5px; justify-content: center;margin-top: 5px;" >                           
                                  
                                             <div class="form-group row" style="width: 100%;display: flex;justify-content: center;padding-right: 40px;margin-top: 0px;margin-bottom: 0px;padding-left: 50px;">
+                                                   
 
+                                               <div id="frame1" class="form-group" id="link" style="display: flex;justify-content: center;width: 100%;height: 90%;">                                        
+                                                      <iframe height="80%" width="90%" id="URL" name="URL">browser does not support the iframe component</iframe>
+                                                </div> 
 
                                                   <div  class="col-md-9" style=" display: flex; justify-content: center; padding-left: 80px;" >
                                                               
                                                                   <button value="boton" type="submit" class="btn btn-primary" name="boton" id="boton" onclick="accion();">
-                                                                      {{ __('Create') }}
+                                                                      {{ __('Submit') }}
                                                                   </button>
                                                   </div> 
 
@@ -132,7 +127,7 @@
 
   var id = $(this).attr("name"); 
   var dependent = $(this).data('dependent');
-  //alert('id=    '+id);
+  alert('id=    '+id);
  // alert('depndent=    '+dependent);
                  var _token = '{{csrf_token()}}';
   
@@ -140,7 +135,8 @@
                               url:"/Petition",
                               method:"POST",
                               data:{id:id, _token:_token,dependent:dependent},
-                              success:function(result){                                
+                              success:function(result){ 
+                              alert(result);                               
                                $('#'+dependent).html(result);
                               }
 
@@ -168,8 +164,11 @@
                               url:"/PetitionURL",
                               method:"POST",
                               data:{id:id, value:value, _token:_token,dependent:dependent},
-                              success:function(result){                               
-                               $('#'+dependent).html(result);
+                              success:function(result){  
+                               // alert(result);                            
+                              // $('#'+dependent).html(result);
+                               //frames['URL'].location.href=result;
+                               document.getElementById('URL').src=result;
                               }
 
                              })

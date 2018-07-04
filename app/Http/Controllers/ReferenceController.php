@@ -7,6 +7,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use App\Property;
 use App\Applications;
 use App\User;
+use GuzzleHttp\Client;
 use View;
 use Session;
 use Redirect;
@@ -22,41 +23,62 @@ class ReferenceController extends Controller
         // Only Authenticated Users can access
         $this->middleware('auth');
     }
-         public function prueba($id){
-		   //  $id=$request->get('value');
-		    // print $id;
-		   // $dependent = $request->get('dependent');
-		  // print $dependent;
-	                  
-                  $Applications=Applications::find($id);
-          // dd($Applications->prequal_link);
-                  $output = '<IFRAME src=""></IFRAME>';
-				    //foreach ($Applications as $applications) {                   
-                       // $output .= '<IFRAME src="'.$Applications->prequal_link.'"></IFRAME>';
+         
+   public function prueba(){
 
-                        print $Applications->prequal_link;                
-                      //  }
-                       // echo $output;
-     }
+          ini_set('max_execution_time', 180);
+
+          $token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwcnAiOiJhcGkiLCJzYnQiOiJ1c2VyIiwic3ViIjoxMTA4LCJwZXIiOnsiYXBpLnByb3BlcnRpZXMuKiI6MSwiYXBpLmFwcGxpY2F0aW9ucy4qIjoxfSwiZXhwIjozMzA2NDM5MzI0MH0.dINvERJtEo6PY5h_ztrPILG6KHS7DUy2IDbKtKSHgW8';
+
+          $url='http://admin.noagent.co.uk/api/v1/applications';
+
+          $client=new Client([
+          	'defaults'=>[
+          			'headers'=>['Authorization' => 'Bearer'.$token],
+          			'Accept' => 'application/json',
+          	]
+          ]);
+         // dd($client);
+          $result = $client->request('GET',$url,[
+          				'headers'=>['Authorization' =>'Bearer'.$token]
+          ])->getBody()->getContents();
+
+          //$header = array('Authorization'=>'Bearer ');
+
+     	//$cli= new Client(['base_uri'=>'']);
+
+          //  $response=$cli->get('',[
+           // 	'headers'=>$header
+           // ])->getBody();
+
+            	//$data=json_decode($response);
+            	dd($result);
+	 			foreach ($data as $key=> $applications) {
+			                 $db_campaign = Applications::UpdateOrcreate(
+										['id'  => $applications->id],
+										[
+								          "contact_by_email"=>$applications->contact_by_email, 
+									        "contact_by_phone"=>$applications->contact_by_phone,
+									        "prequal_link"=>$applications->prequal_link,
+									        "source_id"=>$applications->source->id,
+									        "source_display_name"=>$applications->source->display_name,
+									        "source_key_name"=>$applications->source->key_name
+								        ]
+					     );
+				    }
+                $Applications=Applications::all();
+                dd($Applications);
 
 
-
+   }
     public function Petition_URL(Request $request){
 		     $id=$request->get('value');
-		    // print $id;
+		    
 		    $dependent = $request->get('dependent');
-		  // print $dependent;
-	                  
+		 
                  $Applications=Applications::find($id);
-                  //$Applications=Applications::all();
-          /// dd($Applications);
-                  //$output = '<IFRAME src=""></IFRAME>';
-                 // $output.='<object date=""> </object> ';
-				   // foreach ($Applications as $applications) {                   
-                        $output = '<IFRAME id="'.$dependent.'" src="'.$Applications->prequal_link.'"></IFRAME>';
-                       // $output.='<object date="'.$applications->prequal_link.'"> </object> ';
-                       // print $applications->prequal_link;                
-                       // }
+                                  
+                        $output = $Applications->prequal_link;                       
                         echo $output;
      }
 
@@ -110,21 +132,22 @@ class ReferenceController extends Controller
 	    }
 
 	    public function Connection(){
-             ini_set('max_execution_time', 180);
-	    		//Propertys
-	 			$client = new GuzzleClient([
-	        	'base_uri' => 'https://admin.noagent.co.uk/api/v1/',
-	        	'http_errors' => false,
-	        ]);
 
-	        $campaignsPath = 'public/9MM6IUFV8QMQPAX1LX9Y7TVDSHAKHYDQ/properties';
+			             
+				    		//Propertys
+				 			$client = new GuzzleClient([
+				        	'base_uri' => 'https://admin.noagent.co.uk/api/v1/',
+				        	'http_errors' => false,
+				        ]);
 
-	        try{
-	        	$response = $client->get($campaignsPath);
-	            $properties = json_decode($response->getBody()->getContents());
-	        }catch (RequestException $e) {
+				        $campaignsPath = 'public/9MM6IUFV8QMQPAX1LX9Y7TVDSHAKHYDQ/properties';
 
-	        } 
+				        try{
+				        	$response = $client->get($campaignsPath);
+				            $properties = json_decode($response->getBody()->getContents());
+				        }catch (RequestException $e) {
+
+				        } 
 
 				         foreach ($properties->data as $key=> $property) {
 			            $db_campaign = Property::UpdateOrcreate(
